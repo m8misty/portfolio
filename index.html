@@ -113,112 +113,134 @@
       isolation: isolate;
     }
 
-    /* Большое мягкое живое свечение */
+    /* ОЧЕНЬ БОЛЬШОЕ СВЕЧЕНИЕ */
     .hero-glow {
       position: absolute;
       inset: 0;
       pointer-events: none;
       z-index: 0;
-      transition: opacity 0.7s ease, transform 0.7s ease, filter 0.7s ease;
+      transition: opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
     }
 
     .hero-glow::before,
     .hero-glow::after,
     .hero-glow .glow-core,
-    .hero-glow .glow-ring {
+    .hero-glow .glow-ring,
+    .hero-glow .glow-far {
       content: "";
       position: absolute;
       left: 50%;
-      top: 48%;
+      top: 50%;
       transform: translate(-50%, -50%);
       border-radius: 50%;
       pointer-events: none;
-      transition: opacity 0.7s ease, transform 0.7s ease, filter 0.7s ease;
+      transition: opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
     }
 
-    /* центральное ядро */
+    /* Центральное мягкое ядро */
     .hero-glow .glow-core {
-      width: 520px;
-      height: 520px;
+      width: 700px;
+      height: 700px;
       background: radial-gradient(circle,
-        var(--glow-1) 0%,
-        var(--glow-2) 18%,
-        rgba(167,129,92,0.08) 38%,
-        rgba(167,129,92,0.03) 60%,
+        rgba(167,129,92,0.20) 0%,
+        rgba(167,129,92,0.13) 18%,
+        rgba(167,129,92,0.08) 35%,
+        rgba(167,129,92,0.035) 58%,
         rgba(167,129,92,0) 82%);
-      filter: blur(45px);
+      filter: blur(55px);
       opacity: 1;
       animation: pulseCore 6s ease-in-out infinite;
     }
 
-    /* средний ореол */
+    /* Большой основной ореол */
     .hero-glow::before {
-      width: 950px;
-      height: 950px;
+      width: 1300px;
+      height: 1300px;
       background: radial-gradient(circle,
-        rgba(167,129,92,0.085) 0%,
-        rgba(167,129,92,0.045) 22%,
-        rgba(167,129,92,0.02) 45%,
-        rgba(167,129,92,0.008) 60%,
-        rgba(167,129,92,0) 78%);
-      filter: blur(60px);
+        rgba(167,129,92,0.09) 0%,
+        rgba(167,129,92,0.05) 18%,
+        rgba(167,129,92,0.025) 36%,
+        rgba(167,129,92,0.01) 52%,
+        rgba(167,129,92,0) 72%);
+      filter: blur(80px);
       opacity: 0.95;
-      animation: pulseMid 8s ease-in-out infinite;
+      animation: pulseMid 9s ease-in-out infinite;
     }
 
-    /* внешний ореол */
+    /* Дальний огромный ореол */
     .hero-glow::after {
-      width: 1550px;
-      height: 1550px;
+      width: 2200px;
+      height: 2200px;
       background: radial-gradient(circle,
-        rgba(167,129,92,0.03) 0%,
-        rgba(167,129,92,0.016) 18%,
-        rgba(167,129,92,0.008) 34%,
-        rgba(167,129,92,0.004) 48%,
-        rgba(167,129,92,0) 70%);
-      filter: blur(90px);
+        rgba(167,129,92,0.035) 0%,
+        rgba(167,129,92,0.02) 16%,
+        rgba(167,129,92,0.01) 30%,
+        rgba(167,129,92,0.004) 45%,
+        rgba(167,129,92,0) 68%);
+      filter: blur(120px);
       opacity: 0.9;
-      animation: pulseOuter 11s ease-in-out infinite;
+      animation: pulseOuter 13s ease-in-out infinite;
     }
 
-    /* лёгкое кольцо */
+    /* Кольцевой мягкий градиент */
     .hero-glow .glow-ring {
-      width: 1200px;
-      height: 1200px;
+      width: 1700px;
+      height: 1700px;
       background: radial-gradient(circle,
         rgba(167,129,92,0) 0%,
-        rgba(167,129,92,0) 28%,
-        rgba(167,129,92,0.018) 40%,
-        rgba(167,129,92,0.01) 52%,
-        rgba(167,129,92,0.003) 64%,
-        rgba(167,129,92,0) 78%);
-      filter: blur(55px);
-      opacity: 0.7;
-      animation: pulseRing 9s ease-in-out infinite;
+        rgba(167,129,92,0) 24%,
+        rgba(167,129,92,0.018) 38%,
+        rgba(167,129,92,0.010) 50%,
+        rgba(167,129,92,0.004) 60%,
+        rgba(167,129,92,0) 76%);
+      filter: blur(70px);
+      opacity: 0.72;
+      animation: pulseRing 10s ease-in-out infinite;
+    }
+
+    /* Самый дальний рассеянный фон */
+    .hero-glow .glow-far {
+      width: 2800px;
+      height: 2800px;
+      background: radial-gradient(circle,
+        rgba(167,129,92,0.018) 0%,
+        rgba(167,129,92,0.010) 14%,
+        rgba(167,129,92,0.005) 28%,
+        rgba(167,129,92,0.002) 42%,
+        rgba(167,129,92,0) 62%);
+      filter: blur(140px);
+      opacity: 0.85;
+      animation: pulseFar 15s ease-in-out infinite;
     }
 
     .hero.scrolled .hero-glow .glow-core {
-      opacity: 0.38;
+      opacity: 0.42;
       transform: translate(-50%, -50%) scale(0.92);
-      filter: blur(52px);
+      filter: blur(62px);
     }
 
     .hero.scrolled .hero-glow::before {
       opacity: 0.28;
       transform: translate(-50%, -50%) scale(0.95);
-      filter: blur(72px);
+      filter: blur(95px);
     }
 
     .hero.scrolled .hero-glow::after {
       opacity: 0.16;
       transform: translate(-50%, -50%) scale(0.98);
-      filter: blur(100px);
+      filter: blur(140px);
     }
 
     .hero.scrolled .hero-glow .glow-ring {
-      opacity: 0.14;
+      opacity: 0.12;
       transform: translate(-50%, -50%) scale(0.96);
-      filter: blur(65px);
+      filter: blur(85px);
+    }
+
+    .hero.scrolled .hero-glow .glow-far {
+      opacity: 0.08;
+      transform: translate(-50%, -50%) scale(0.98);
+      filter: blur(160px);
     }
 
     @keyframes pulseCore {
@@ -246,7 +268,7 @@
     @keyframes pulseOuter {
       0%, 100% {
         transform: translate(-50%, -50%) scale(1);
-        opacity: 0.7;
+        opacity: 0.72;
       }
       50% {
         transform: translate(-50%, -50%) scale(1.03);
@@ -261,7 +283,18 @@
       }
       50% {
         transform: translate(-50%, -50%) scale(1.05);
-        opacity: 0.8;
+        opacity: 0.78;
+      }
+    }
+
+    @keyframes pulseFar {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.62;
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.02);
+        opacity: 0.82;
       }
     }
 
@@ -284,17 +317,17 @@
       font-size: clamp(68px, 10vw, 118px);
       line-height: 0.9;
       font-weight: 600;
-      margin-bottom: 28px;
+      margin-bottom: 26px;
       letter-spacing: -1px;
       text-shadow: 0 0 18px rgba(167,129,92,0.08);
     }
 
     .hero-intro {
-      max-width: 720px;
+      max-width: 700px;
       margin: 0 auto;
       color: var(--muted);
-      font-size: 19px;
-      line-height: 1.95;
+      font-size: 20px;
+      line-height: 1.85;
       letter-spacing: 0.01em;
       text-wrap: balance;
     }
@@ -304,7 +337,7 @@
     }
 
     .buttons {
-      margin-top: 38px;
+      margin-top: 42px;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
@@ -637,29 +670,34 @@
       }
 
       .hero-glow .glow-core {
-        width: 430px;
-        height: 430px;
+        width: 500px;
+        height: 500px;
       }
 
       .hero-glow::before {
-        width: 760px;
-        height: 760px;
+        width: 950px;
+        height: 950px;
       }
 
       .hero-glow::after {
-        width: 1180px;
-        height: 1180px;
+        width: 1600px;
+        height: 1600px;
       }
 
       .hero-glow .glow-ring {
-        width: 920px;
-        height: 920px;
+        width: 1250px;
+        height: 1250px;
+      }
+
+      .hero-glow .glow-far {
+        width: 2000px;
+        height: 2000px;
       }
 
       .hero-intro {
         max-width: 650px;
         font-size: 18px;
-        line-height: 1.85;
+        line-height: 1.8;
       }
     }
 
@@ -688,7 +726,7 @@
 
       .hero-intro {
         font-size: 16px;
-        line-height: 1.8;
+        line-height: 1.75;
         max-width: 95%;
       }
 
@@ -717,6 +755,7 @@
     <div class="hero-glow">
       <div class="glow-core"></div>
       <div class="glow-ring"></div>
+      <div class="glow-far"></div>
     </div>
 
     <div class="hero-content container">
@@ -727,7 +766,6 @@
       <div class="hero-intro">
         <span class="line">Занимаюсь строительной документацией,</span>
         <span class="line">архитектурными задачами и визуализацией.</span>
-        <span class="line">Люблю аккуратную работу, структуру и понятный результат.</span>
       </div>
 
       <div class="buttons">
@@ -1006,8 +1044,8 @@
 
     function updateHeroGlow() {
       const scrollY = window.scrollY;
-      const fadeStart = 40;
-      const fadeEnd = 420;
+      const fadeStart = 20;
+      const fadeEnd = 520;
 
       let progress = (scrollY - fadeStart) / (fadeEnd - fadeStart);
       progress = Math.min(Math.max(progress, 0), 1);
@@ -1019,7 +1057,7 @@
       }
 
       const glow = document.querySelector('.hero-glow');
-      glow.style.opacity = 1 - progress * 0.18;
+      glow.style.opacity = 1 - progress * 0.08;
     }
 
     window.addEventListener('scroll', updateHeroGlow, { passive: true });
