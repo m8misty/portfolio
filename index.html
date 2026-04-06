@@ -3,189 +3,777 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Моё портфолио</title>
+  <title>Портфолио</title>
+
+  <!-- Шрифты -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --bg: #12100E;
+      --bg-soft: #1B1713;
+      --bg-card: #201B17;
+      --line: rgba(232, 226, 217, 0.08);
+      --text: #E8E2D9;
+      --muted: #A89F95;
+      --accent: #8A6A4A;
+      --accent-soft: #6E5440;
+      --white-soft: rgba(255,255,255,0.04);
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #111;
-      line-height: 1.6;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #12100E 0%, #15120F 100%);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
     }
 
-    header {
-      background: white;
-      padding: 80px 20px 60px;
-      text-align: center;
-      border-bottom: 1px solid #ddd;
-    }
-
-    header h1 {
-      font-size: 48px;
-      margin-bottom: 15px;
-    }
-
-    header p {
-      font-size: 20px;
-      color: #555;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    nav {
-      background: white;
-      padding: 20px;
-      text-align: center;
-      border-bottom: 1px solid #ddd;
-    }
-
-    nav a {
-      margin: 0 15px;
+    a {
+      color: inherit;
       text-decoration: none;
-      color: #111;
-      font-weight: bold;
     }
 
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(18, 16, 14, 0.72);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      letter-spacing: 0.5px;
+      color: var(--text);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      padding: 100px 0 80px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 620px;
+      height: 620px;
+      background: radial-gradient(circle, rgba(138,106,74,0.14) 0%, rgba(138,106,74,0) 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      filter: blur(20px);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
+
+    .hero-subtitle {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(56px, 9vw, 108px);
+      line-height: 0.95;
+      font-weight: 600;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .buttons {
+      margin-top: 36px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 500;
+      border: 1px solid var(--line);
+      transition: all 0.25s ease;
+      min-width: 150px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #f8f2ea;
+      border-color: transparent;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-soft);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: var(--white-soft);
+      transform: translateY(-2px);
+    }
+
+    /* SECTION */
     section {
-      max-width: 1100px;
-      margin: 60px auto;
-      padding: 0 20px;
+      padding: 110px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      margin-bottom: 42px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .section-label {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 12px;
+      margin-bottom: 10px;
     }
 
     h2 {
-      font-size: 32px;
-      margin-bottom: 25px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1;
+      font-weight: 600;
     }
 
-    .about {
-      background: white;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    .section-desc {
+      max-width: 460px;
+      color: var(--muted);
+      font-size: 15px;
     }
 
-    .projects {
+    /* CARDS */
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 28px;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(232, 226, 217, 0.14);
+    }
+
+    /* ABOUT */
+    .about-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
+      grid-template-columns: 1.3fr 0.9fr;
+      gap: 22px;
     }
 
-    .project-card {
-      background: white;
-      border-radius: 16px;
+    .about-main {
+      font-size: 17px;
+      color: var(--text);
+    }
+
+    .about-main p + p {
+      margin-top: 16px;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .mini-item {
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .mini-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .mini-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.6px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .mini-value {
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    /* SKILLS */
+    .grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .skill-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      margin-bottom: 14px;
+    }
+
+    .skill-list {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* EXPERIENCE */
+    .timeline {
+      display: grid;
+      gap: 18px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .timeline-date {
+      color: var(--muted);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding-top: 4px;
+    }
+
+    .timeline-role {
+      font-size: 22px;
+      font-family: 'Cormorant Garamond', serif;
+      margin-bottom: 8px;
+    }
+
+    .timeline-company {
+      color: var(--muted);
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    .timeline-desc {
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    /* PROJECTS */
+    .project {
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-      transition: transform 0.2s ease;
+      border-radius: 26px;
+      background: #171411;
+      border: 1px solid var(--line);
+      transition: all 0.35s ease;
+      display: flex;
+      flex-direction: column;
     }
 
-    .project-card:hover {
-      transform: translateY(-5px);
+    .project:hover {
+      transform: translateY(-6px);
+      border-color: rgba(232, 226, 217, 0.16);
     }
 
     .project-image {
       width: 100%;
-      height: 220px;
-      background: #ddd;
+      aspect-ratio: 4 / 3;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0)),
+        radial-gradient(circle at top left, rgba(138,106,74,0.18), transparent 45%),
+        #211B17;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #666;
-      font-size: 18px;
+      align-items: end;
+      padding: 22px;
+      color: rgba(232, 226, 217, 0.5);
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
     .project-content {
-      padding: 20px;
+      padding: 24px;
     }
 
-    .project-content h3 {
+    .project-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
       margin-bottom: 10px;
-      font-size: 22px;
     }
 
-    .contacts {
-      background: white;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    .project-text {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 16px;
     }
 
+    .project-tag {
+      display: inline-block;
+      font-size: 12px;
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 12px;
+      margin-right: 8px;
+      margin-top: 6px;
+    }
+
+    /* CONTACT */
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 22px;
+    }
+
+    .contact-big {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(34px, 6vw, 62px);
+      line-height: 0.98;
+      margin-bottom: 18px;
+    }
+
+    .contact-text {
+      color: var(--muted);
+      max-width: 560px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .contact-item {
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--line);
+      transition: 0.25s ease;
+    }
+
+    .contact-item:hover {
+      transform: translateY(-3px);
+      border-color: rgba(232, 226, 217, 0.14);
+    }
+
+    .contact-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.6px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .contact-value {
+      font-size: 16px;
+      color: var(--text);
+    }
+
+    /* FOOTER */
     footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 24px 40px;
       text-align: center;
-      padding: 40px 20px;
-      color: #777;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* ANIMATIONS */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      will-change: opacity, transform;
+    }
+
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 980px) {
+      .about-grid,
+      .contact-wrap,
+      .timeline-item,
+      .grid-3,
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-date {
+        padding-top: 0;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 120px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 {
+        line-height: 1;
+      }
+
+      .section-head {
+        margin-bottom: 28px;
+      }
+
+      .card,
+      .project-content,
+      .project-image {
+        padding: 20px;
+      }
+
+      section {
+        padding: 80px 0;
+      }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Имя Фамилия</h1>
-    <p>Архитектор / инженер-строитель / студент</p>
-  </header>
-
+  <!-- NAV -->
   <nav>
-    <a href="#about">Обо мне</a>
-    <a href="#projects">Проекты</a>
-    <a href="#contacts">Контакты</a>
+    <div class="nav-inner">
+      <div class="logo">Portfolio</div>
+      <div class="nav-links">
+        <a href="#about">Обо мне</a>
+        <a href="#skills">Навыки</a>
+        <a href="#experience">Опыт</a>
+        <a href="#projects">Проекты</a>
+        <a href="#contacts">Контакты</a>
+      </div>
+    </div>
   </nav>
 
-  <section id="about">
-    <h2>Обо мне</h2>
-    <div class="about">
+  <!-- HERO -->
+  <section class="hero fade-up">
+    <div class="hero-content container">
+      <div class="hero-subtitle">Архитектор / инженер-строитель</div>
+      <h1>Имя<br>Фамилия</h1>
       <p>
-        Краткое описание о себе. Здесь можно написать, чем ты занимаешься,
-        в каких программах работаешь, какие задачи умеешь решать,
-        и что тебе интересно в профессии.
+        Проектирование, рабочая документация, фасадные решения, координация разделов
+        и визуальная подача архитектурных проектов.
       </p>
-    </div>
-  </section>
 
-  <section id="projects">
-    <h2>Проекты</h2>
-    <div class="projects">
-      <div class="project-card">
-        <div class="project-image">Изображение проекта</div>
-        <div class="project-content">
-          <h3>Проект 1</h3>
-          <p>Краткое описание проекта, твоя роль и что ты делал.</p>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-image">Изображение проекта</div>
-        <div class="project-content">
-          <h3>Проект 2</h3>
-          <p>Краткое описание проекта, твоя роль и что ты делал.</p>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-image">Изображение проекта</div>
-        <div class="project-content">
-          <h3>Проект 3</h3>
-          <p>Краткое описание проекта, твоя роль и что ты делал.</p>
-        </div>
+      <div class="buttons">
+        <a href="#projects" class="btn btn-primary">Смотреть проекты</a>
+        <a href="#" class="btn btn-secondary">Скачать CV</a>
+        <a href="#contacts" class="btn btn-secondary">Контакты</a>
       </div>
     </div>
   </section>
 
-  <section id="contacts">
-    <h2>Контакты</h2>
-    <div class="contacts">
-      <p>Email: yourmail@example.com</p>
-      <p>Telegram: @yourusername</p>
-      <p>Behance / HH / LinkedIn — если нужно</p>
+  <!-- ABOUT -->
+  <section id="about" class="fade-up">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-label">Обо мне</div>
+          <h2>Строгая подача без лишнего шума</h2>
+        </div>
+        <div class="section-desc">
+          Этот блок потом заполним твоими реальными данными из hh и портфолио.
+        </div>
+      </div>
+
+      <div class="about-grid">
+        <div class="card about-main">
+          <p>
+            Здесь будет твой нормальный человеческий текст о себе: кто ты, чем занимаешься,
+            какие задачи умеешь решать, на чём специализируешься и в каком направлении хочешь расти.
+          </p>
+          <p>
+            Важно, чтобы это читалось не как “я ответственный и стрессоустойчивый”,
+            а как описание реальной пользы, которую ты можешь дать проекту или команде.
+          </p>
+        </div>
+
+        <div class="card mini-list">
+          <div class="mini-item">
+            <div class="mini-title">Локация</div>
+            <div class="mini-value">Рига / удалённо / релокация</div>
+          </div>
+          <div class="mini-item">
+            <div class="mini-title">Софт</div>
+            <div class="mini-value">AutoCAD, Revit, ArchiCAD, SketchUp</div>
+          </div>
+          <div class="mini-item">
+            <div class="mini-title">Фокус</div>
+            <div class="mini-value">Рабочая документация, фасады, узлы</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="fade-up">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-label">Навыки</div>
+          <h2>Инструменты и практика</h2>
+        </div>
+        <div class="section-desc">
+          Тут потом можно будет аккуратно разложить всё, что у тебя есть по делу.
+        </div>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="skill-title">Проектирование</div>
+          <div class="skill-list">AutoCAD, Revit, ArchiCAD, оформление документации, корректировка чертежей</div>
+        </div>
+        <div class="card">
+          <div class="skill-title">Визуализация</div>
+          <div class="skill-list">SketchUp, Photoshop, подача проектных решений, визуальная структура</div>
+        </div>
+        <div class="card">
+          <div class="skill-title">Практика</div>
+          <div class="skill-list">Фасадные решения, узлы, рабочие разделы, координация со смежниками</div>
+        </div>
+        <div class="card">
+          <div class="skill-title">Дополнительно</div>
+          <div class="skill-list">Excel, работа с PDF, проверка комплектов, структурирование информации</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="fade-up">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-label">Опыт</div>
+          <h2>Что ты уже делал</h2>
+        </div>
+        <div class="section-desc">
+          Это важный блок — он как раз и заменяет обычное hh-резюме.
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="card timeline-item">
+          <div class="timeline-date">2024 — 2025</div>
+          <div>
+            <div class="timeline-role">Стажёр / помощник проектировщика</div>
+            <div class="timeline-company">Компания / бюро / практика</div>
+            <div class="timeline-desc">
+              Участие в подготовке рабочей документации, корректировке проектных решений,
+              оформлении чертежей и сопровождении задач по разделу.
+            </div>
+          </div>
+        </div>
+
+        <div class="card timeline-item">
+          <div class="timeline-date">2023 — 2024</div>
+          <div>
+            <div class="timeline-role">Учебные и личные проекты</div>
+            <div class="timeline-company">Архитектурная / инженерная практика</div>
+            <div class="timeline-desc">
+              Работа с планировками, фасадами, узлами, подачей проектов и структурированием материалов
+              для портфолио и презентации.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="fade-up">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-label">Проекты</div>
+          <h2>Избранные работы</h2>
+        </div>
+        <div class="section-desc">
+          Здесь потом будут уже твои реальные проекты с картинками и нормальными описаниями.
+        </div>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="project">
+          <div class="project-image">Project Preview</div>
+          <div class="project-content">
+            <div class="project-title">Проект 01</div>
+            <div class="project-text">
+              Краткое описание проекта, твоя роль, что делал и в чём была задача.
+            </div>
+            <span class="project-tag">Фасады</span>
+            <span class="project-tag">Рабочая документация</span>
+          </div>
+        </div>
+
+        <div class="project">
+          <div class="project-image">Project Preview</div>
+          <div class="project-content">
+            <div class="project-title">Проект 02</div>
+            <div class="project-text">
+              Ещё один кейс — лучше коротко, но по делу, чем много бессмысленного текста.
+            </div>
+            <span class="project-tag">Узлы</span>
+            <span class="project-tag">Координация</span>
+          </div>
+        </div>
+
+        <div class="project">
+          <div class="project-image">Project Preview</div>
+          <div class="project-content">
+            <div class="project-title">Проект 03</div>
+            <div class="project-text">
+              Здесь можно будет показать учебный, личный или рабочий проект — если он хорошо подан.
+            </div>
+            <span class="project-tag">Визуализация</span>
+            <span class="project-tag">Подача</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contacts" class="fade-up">
+    <div class="container">
+      <div class="contact-wrap">
+        <div>
+          <div class="section-label">Контакты</div>
+          <div class="contact-big">Готов к новым задачам и нормальной работе.</div>
+          <div class="contact-text">
+            Этот блок потом можно сделать реально рабочим: чтобы тебе можно было написать,
+            открыть hh, скачать резюме или перейти в Telegram.
+          </div>
+        </div>
+
+        <div class="contact-list">
+          <div class="contact-item">
+            <div class="contact-label">Email</div>
+            <div class="contact-value">yourmail@example.com</div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">Telegram</div>
+            <div class="contact-value">@yourusername</div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">Резюме</div>
+            <div class="contact-value">Скачать PDF / ссылка на hh</div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <footer>
-    © 2026 Моё портфолио
+    © 2026 Portfolio
   </footer>
+
+  <script>
+    const elements = document.querySelectorAll('.fade-up');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, {
+      threshold: 0.12
+    });
+
+    elements.forEach((el) => observer.observe(el));
+  </script>
 
 </body>
 </html>
