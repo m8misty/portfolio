@@ -18,9 +18,10 @@
       --text: #E8E2D9;
       --muted: #A89F95;
       --accent: #8A6A4A;
-      --accent-soft: #6E5440;
       --hover-bg: rgba(138,106,74,0.12);
-      --white-soft: rgba(255,255,255,0.04);
+      --glow-1: rgba(167, 129, 92, 0.18);
+      --glow-2: rgba(167, 129, 92, 0.10);
+      --glow-3: rgba(167, 129, 92, 0.05);
     }
 
     * {
@@ -69,9 +70,10 @@
 
     .logo {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
-      letter-spacing: 0.5px;
+      font-size: 24px;
+      letter-spacing: 0.2px;
       color: var(--text);
+      opacity: 0.95;
     }
 
     .nav-links {
@@ -97,19 +99,88 @@
       text-align: center;
       position: relative;
       padding: 100px 0 80px;
+      overflow: hidden;
     }
 
-    .hero::before {
+    .hero-glow {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .hero-glow::before,
+    .hero-glow::after {
       content: "";
       position: absolute;
-      width: 620px;
-      height: 620px;
-      background: radial-gradient(circle, rgba(138,106,74,0.14) 0%, rgba(138,106,74,0) 70%);
-      top: 50%;
       left: 50%;
+      top: 46%;
       transform: translate(-50%, -50%);
-      pointer-events: none;
-      filter: blur(20px);
+      border-radius: 50%;
+      filter: blur(30px);
+      transition: all 0.4s ease;
+    }
+
+    .hero-glow::before {
+      width: 520px;
+      height: 520px;
+      background:
+        radial-gradient(circle,
+          var(--glow-1) 0%,
+          var(--glow-2) 18%,
+          rgba(167,129,92,0.07) 35%,
+          rgba(167,129,92,0.03) 52%,
+          rgba(167,129,92,0.015) 68%,
+          rgba(167,129,92,0) 82%);
+      opacity: 1;
+      animation: pulseGlow 6s ease-in-out infinite;
+    }
+
+    .hero-glow::after {
+      width: 860px;
+      height: 860px;
+      background:
+        radial-gradient(circle,
+          rgba(167,129,92,0.05) 0%,
+          rgba(167,129,92,0.025) 24%,
+          rgba(167,129,92,0.012) 42%,
+          rgba(167,129,92,0.005) 58%,
+          rgba(167,129,92,0) 75%);
+      opacity: 0.9;
+      animation: pulseGlowWide 8s ease-in-out infinite;
+    }
+
+    .hero.scrolled .hero-glow::before {
+      opacity: 0.45;
+      transform: translate(-50%, -50%) scale(0.94);
+    }
+
+    .hero.scrolled .hero-glow::after {
+      opacity: 0.30;
+      transform: translate(-50%, -50%) scale(0.96);
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.95;
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.05);
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulseGlowWide {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.65;
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.04);
+        opacity: 0.9;
+      }
     }
 
     .hero-content {
@@ -128,15 +199,16 @@
 
     .hero h1 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(56px, 9vw, 108px);
-      line-height: 0.95;
+      font-size: clamp(62px, 10vw, 110px);
+      line-height: 0.92;
       font-weight: 600;
-      margin-bottom: 24px;
+      margin-bottom: 26px;
       letter-spacing: -1px;
+      text-shadow: 0 0 18px rgba(167,129,92,0.08);
     }
 
     .hero p {
-      max-width: 760px;
+      max-width: 660px;
       margin: 0 auto;
       color: var(--muted);
       font-size: 18px;
@@ -160,7 +232,7 @@
       font-weight: 500;
       border: 1px solid var(--line);
       transition: all 0.25s ease;
-      min-width: 160px;
+      min-width: 190px;
       background: transparent;
       color: var(--text);
     }
@@ -473,11 +545,21 @@
       .nav-links {
         display: none;
       }
+
+      .hero-glow::before {
+        width: 420px;
+        height: 420px;
+      }
+
+      .hero-glow::after {
+        width: 700px;
+        height: 700px;
+      }
     }
 
     @media (max-width: 640px) {
       .hero h1 {
-        line-height: 1;
+        line-height: 0.98;
       }
 
       .section-head {
@@ -493,6 +575,14 @@
       section {
         padding: 80px 0;
       }
+
+      .btn {
+        min-width: 100%;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
@@ -500,7 +590,7 @@
 
   <nav>
     <div class="nav-inner">
-      <div class="logo">Portfolio</div>
+      <div class="logo">Дополнение к резюме HH</div>
       <div class="nav-links">
         <a href="#about">Обо мне</a>
         <a href="#skills">Навыки</a>
@@ -511,18 +601,20 @@
     </div>
   </nav>
 
-  <section class="hero fade-up">
+  <section class="hero fade-up" id="hero">
+    <div class="hero-glow"></div>
+
     <div class="hero-content container">
       <div class="hero-subtitle">Инженер ПТО / Архитектор-дизайнер</div>
       <h1>Штыков<br>Андрей</h1>
       <p>
-        Исполнительная и проектная документация, фасадные решения, узлы,
-        архитектурные проекты и визуализация. Опыт работы в строительстве и проектировании.
+        Занимаюсь строительной документацией, архитектурными задачами и визуализацией.<br>
+        Люблю аккуратную работу, структуру и понятный результат.
       </p>
 
       <div class="buttons">
         <a href="#projects" class="btn">Смотреть проекты</a>
-        <a href="#" class="btn">Скачать PDF</a>
+        <a href="#" class="btn">Скачать PDF-резюме</a>
         <a href="#contacts" class="btn">Контакты</a>
       </div>
     </div>
@@ -791,6 +883,16 @@
     });
 
     elements.forEach((el) => observer.observe(el));
+
+    const hero = document.getElementById('hero');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 120) {
+        hero.classList.add('scrolled');
+      } else {
+        hero.classList.remove('scrolled');
+      }
+    });
   </script>
 
 </body>
