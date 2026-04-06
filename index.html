@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Андрей Штыков — Портфолио</title>
+  <title>Андрей Штыков — Portfolio</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,6 +19,7 @@
       --muted: #A89F95;
       --accent: #8A6A4A;
       --accent-soft: #6E5440;
+      --hover-bg: rgba(138,106,74,0.12);
       --white-soft: rgba(255,255,255,0.04);
     }
 
@@ -159,28 +160,16 @@
       font-weight: 500;
       border: 1px solid var(--line);
       transition: all 0.25s ease;
-      min-width: 150px;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #f8f2ea;
-      border-color: transparent;
-    }
-
-    .btn-primary:hover {
-      background: var(--accent-soft);
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
+      min-width: 160px;
       background: transparent;
       color: var(--text);
     }
 
-    .btn-secondary:hover {
-      background: var(--white-soft);
+    .btn:hover {
+      background: var(--hover-bg);
+      border-color: rgba(232, 226, 217, 0.18);
       transform: translateY(-2px);
+      box-shadow: 0 0 0 1px rgba(138,106,74,0.08) inset;
     }
 
     section {
@@ -511,7 +500,7 @@
 
   <nav>
     <div class="nav-inner">
-      <div class="logo">A.S.</div>
+      <div class="logo">Portfolio</div>
       <div class="nav-links">
         <a href="#about">Обо мне</a>
         <a href="#skills">Навыки</a>
@@ -524,17 +513,17 @@
 
   <section class="hero fade-up">
     <div class="hero-content container">
-      <div class="hero-subtitle">Инженер ПТО / Архитектор</div>
-      <h1>Андрей<br>Штыков</h1>
+      <div class="hero-subtitle">Инженер ПТО / Архитектор-дизайнер</div>
+      <h1>Штыков<br>Андрей</h1>
       <p>
         Исполнительная и проектная документация, фасадные решения, узлы,
         архитектурные проекты и визуализация. Опыт работы в строительстве и проектировании.
       </p>
 
       <div class="buttons">
-        <a href="#projects" class="btn btn-primary">Смотреть проекты</a>
-        <a href="#" class="btn btn-secondary">Скачать CV</a>
-        <a href="#contacts" class="btn btn-secondary">Контакты</a>
+        <a href="#projects" class="btn">Смотреть проекты</a>
+        <a href="#" class="btn">Скачать PDF</a>
+        <a href="#contacts" class="btn">Контакты</a>
       </div>
     </div>
   </section>
