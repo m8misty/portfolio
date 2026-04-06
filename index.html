@@ -109,180 +109,155 @@
       isolation: isolate;
     }
 
-    /* СВЕЧЕНИЕ КОЛЬЦАМИ */
-    .hero-glow {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .hero-glow::before,
-    .hero-glow::after,
-    .hero-glow .ring-main,
-    .hero-glow .ring-soft {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      transition: opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
-      pointer-events: none;
-    }
-
-    /* Главное видимое кольцевое свечение */
-    .hero-glow::before {
-      width: 2600px;
-      height: 2600px;
-      background:
-        radial-gradient(circle,
-          rgba(167,129,92,0.24) 0px,
-          rgba(167,129,92,0.24) 130px,
-
-          rgba(167,129,92,0.17) 260px,
-          rgba(167,129,92,0.11) 470px,
-
-          rgba(167,129,92,0.075) 700px,
-          rgba(167,129,92,0.05) 980px,
-
-          rgba(167,129,92,0.03) 1280px,
-          rgba(167,129,92,0.016) 1650px,
-
-          rgba(167,129,92,0.008) 1950px,
-          rgba(167,129,92,0) 2250px
-        );
-      filter: blur(65px);
-      opacity: 1;
-      animation: pulseGlow 8s ease-in-out infinite;
-    }
-
-    /* Дополнительная глубина */
-    .hero-glow::after {
-      width: 3200px;
-      height: 3200px;
-      background:
-        radial-gradient(circle,
-          rgba(167,129,92,0.11) 0px,
-          rgba(167,129,92,0.06) 420px,
-          rgba(167,129,92,0.03) 950px,
-          rgba(167,129,92,0.012) 1450px,
-          rgba(167,129,92,0) 2050px
-        );
-      filter: blur(120px);
-      opacity: 0.78;
-      animation: pulseGlowWide 12s ease-in-out infinite;
-    }
-
-    /* Внутреннее мягкое ядро */
-    .hero-glow .ring-main {
-      width: 780px;
-      height: 780px;
-      background:
-        radial-gradient(circle,
-          rgba(167,129,92,0.18) 0%,
-          rgba(167,129,92,0.11) 28%,
-          rgba(167,129,92,0.05) 52%,
-          rgba(167,129,92,0.02) 68%,
-          rgba(167,129,92,0) 84%);
-      filter: blur(48px);
-      opacity: 0.95;
-      animation: pulseCore 6s ease-in-out infinite;
-    }
-
-    /* Ещё один мягкий внешний слой */
-    .hero-glow .ring-soft {
-      width: 1850px;
-      height: 1850px;
-      background:
-        radial-gradient(circle,
-          rgba(167,129,92,0) 0%,
-          rgba(167,129,92,0) 20%,
-          rgba(167,129,92,0.018) 34%,
-          rgba(167,129,92,0.010) 48%,
-          rgba(167,129,92,0.004) 60%,
-          rgba(167,129,92,0) 74%);
-      filter: blur(75px);
-      opacity: 0.7;
-      animation: pulseRing 10s ease-in-out infinite;
-    }
-
-    .hero.scrolled .hero-glow::before {
-      opacity: 0.42;
-      transform: translate(-50%, -50%) scale(0.95);
-      filter: blur(78px);
-    }
-
-    .hero.scrolled .hero-glow::after {
-      opacity: 0.2;
-      transform: translate(-50%, -50%) scale(0.98);
-      filter: blur(135px);
-    }
-
-    .hero.scrolled .hero-glow .ring-main {
-      opacity: 0.34;
-      transform: translate(-50%, -50%) scale(0.93);
-      filter: blur(58px);
-    }
-
-    .hero.scrolled .hero-glow .ring-soft {
-      opacity: 0.16;
-      transform: translate(-50%, -50%) scale(0.97);
-      filter: blur(90px);
-    }
-
-    @keyframes pulseGlow {
-      0%, 100% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.95;
-      }
-      50% {
-        transform: translate(-50%, -50%) scale(1.03);
-        opacity: 1;
-      }
-    }
-
-    @keyframes pulseGlowWide {
-      0%, 100% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.72;
-      }
-      50% {
-        transform: translate(-50%, -50%) scale(1.02);
-        opacity: 0.86;
-      }
-    }
-
-    @keyframes pulseCore {
-      0%, 100% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.9;
-      }
-      50% {
-        transform: translate(-50%, -50%) scale(1.04);
-        opacity: 1;
-      }
-    }
-
-    @keyframes pulseRing {
-      0%, 100% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.55;
-      }
-      50% {
-        transform: translate(-50%, -50%) scale(1.04);
-        opacity: 0.78;
-      }
-    }
-
     .hero-content {
       position: relative;
-      z-index: 2;
+      z-index: 3;
       max-width: 980px;
+    }
+
+    /* ЛОКАЛЬНАЯ ЗОНА СВЕЧЕНИЯ */
+    .hero-focus {
+      position: absolute;
+      left: 50%;
+      top: 51%;
+      transform: translate(-50%, -50%);
+      width: min(92vw, 920px);
+      height: min(92vw, 920px);
+      pointer-events: none;
+      z-index: 1;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    .hero-focus .ring {
+      position: absolute;
+      inset: 50% auto auto 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      pointer-events: none;
+      transition:
+        opacity 0.75s ease,
+        transform 0.85s ease,
+        filter 0.85s ease;
+    }
+
+    /* 4 ступени как ты рисовал */
+    .ring-outer {
+      width: 920px;
+      height: 920px;
+      background:
+        radial-gradient(circle,
+          rgba(167,129,92,0.00) 0%,
+          rgba(167,129,92,0.00) 52%,
+          rgba(167,129,92,0.030) 62%,
+          rgba(167,129,92,0.020) 72%,
+          rgba(167,129,92,0.010) 82%,
+          rgba(167,129,92,0.000) 100%);
+      filter: blur(34px);
+      opacity: 0.78;
+    }
+
+    .ring-mid-2 {
+      width: 720px;
+      height: 720px;
+      background:
+        radial-gradient(circle,
+          rgba(167,129,92,0.00) 0%,
+          rgba(167,129,92,0.00) 46%,
+          rgba(167,129,92,0.040) 58%,
+          rgba(167,129,92,0.026) 70%,
+          rgba(167,129,92,0.012) 82%,
+          rgba(167,129,92,0.000) 100%);
+      filter: blur(28px);
+      opacity: 0.86;
+    }
+
+    .ring-mid-1 {
+      width: 520px;
+      height: 520px;
+      background:
+        radial-gradient(circle,
+          rgba(167,129,92,0.00) 0%,
+          rgba(167,129,92,0.00) 40%,
+          rgba(167,129,92,0.055) 54%,
+          rgba(167,129,92,0.034) 68%,
+          rgba(167,129,92,0.014) 82%,
+          rgba(167,129,92,0.000) 100%);
+      filter: blur(22px);
+      opacity: 0.95;
+    }
+
+    .ring-core {
+      width: 260px;
+      height: 260px;
+      background:
+        radial-gradient(circle,
+          rgba(167,129,92,0.15) 0%,
+          rgba(167,129,92,0.12) 18%,
+          rgba(167,129,92,0.075) 36%,
+          rgba(167,129,92,0.028) 62%,
+          rgba(167,129,92,0.000) 100%);
+      filter: blur(18px);
+      opacity: 1;
+    }
+
+    /* Плавное дыхание */
+    .ring-outer {
+      animation: breatheOuter 10s ease-in-out infinite;
+    }
+    .ring-mid-2 {
+      animation: breatheMid2 8.5s ease-in-out infinite;
+    }
+    .ring-mid-1 {
+      animation: breatheMid1 7s ease-in-out infinite;
+    }
+    .ring-core {
+      animation: breatheCore 5.5s ease-in-out infinite;
+    }
+
+    @keyframes breatheOuter {
+      0%,100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.02); }
+    }
+
+    @keyframes breatheMid2 {
+      0%,100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.018); }
+    }
+
+    @keyframes breatheMid1 {
+      0%,100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.022); }
+    }
+
+    @keyframes breatheCore {
+      0%,100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.03); }
+    }
+
+    /* СКРОЛЛ-ЗАТУХАНИЕ ПО СТУПЕНЯМ */
+    .hero-focus.step-1 .ring-outer {
+      opacity: 0.18;
+      transform: translate(-50%, -50%) scale(0.985);
+      filter: blur(38px);
+    }
+
+    .hero-focus.step-2 .ring-mid-2 {
+      opacity: 0.18;
+      transform: translate(-50%, -50%) scale(0.985);
+      filter: blur(32px);
+    }
+
+    .hero-focus.step-3 .ring-mid-1 {
+      opacity: 0.18;
+      transform: translate(-50%, -50%) scale(0.985);
+      filter: blur(26px);
+    }
+
+    .hero-focus.step-4 .ring-core {
+      opacity: 0.18;
+      transform: translate(-50%, -50%) scale(0.975);
+      filter: blur(22px);
     }
 
     .hero-subtitle {
@@ -300,7 +275,9 @@
       font-weight: 600;
       margin-bottom: 28px;
       letter-spacing: -1px;
-      text-shadow: 0 0 18px rgba(167,129,92,0.08);
+      text-shadow: 0 0 18px rgba(167,129,92,0.05);
+      position: relative;
+      z-index: 3;
     }
 
     .hero-intro {
@@ -311,6 +288,8 @@
       line-height: 1.9;
       letter-spacing: 0.01em;
       text-wrap: balance;
+      position: relative;
+      z-index: 3;
     }
 
     .hero-intro .line {
@@ -323,6 +302,8 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: 14px;
+      position: relative;
+      z-index: 3;
     }
 
     .btn {
@@ -336,7 +317,7 @@
       border: 1px solid var(--line);
       transition: all 0.25s ease;
       min-width: 190px;
-      background: transparent;
+      background: rgba(18, 16, 14, 0.18);
       color: var(--text);
       backdrop-filter: blur(6px);
     }
@@ -651,25 +632,15 @@
         display: none;
       }
 
-      .hero-glow::before {
-        width: 1800px;
-        height: 1800px;
+      .hero-focus {
+        width: min(100vw, 760px);
+        height: min(100vw, 760px);
       }
 
-      .hero-glow::after {
-        width: 2400px;
-        height: 2400px;
-      }
-
-      .hero-glow .ring-main {
-        width: 560px;
-        height: 560px;
-      }
-
-      .hero-glow .ring-soft {
-        width: 1300px;
-        height: 1300px;
-      }
+      .ring-outer { width: 760px; height: 760px; }
+      .ring-mid-2 { width: 590px; height: 590px; }
+      .ring-mid-1 { width: 430px; height: 430px; }
+      .ring-core { width: 220px; height: 220px; }
 
       .hero-intro {
         max-width: 650px;
@@ -710,6 +681,16 @@
       .logo {
         font-size: 20px;
       }
+
+      .hero-focus {
+        width: 92vw;
+        height: 92vw;
+      }
+
+      .ring-outer { width: 92vw; height: 92vw; }
+      .ring-mid-2 { width: 72vw; height: 72vw; }
+      .ring-mid-1 { width: 54vw; height: 54vw; }
+      .ring-core { width: 30vw; height: 30vw; }
     }
   </style>
 </head>
@@ -729,9 +710,12 @@
   </nav>
 
   <section class="hero fade-up" id="hero">
-    <div class="hero-glow">
-      <div class="ring-main"></div>
-      <div class="ring-soft"></div>
+
+    <div class="hero-focus" id="heroFocus">
+      <div class="ring ring-outer"></div>
+      <div class="ring ring-mid-2"></div>
+      <div class="ring ring-mid-1"></div>
+      <div class="ring ring-core"></div>
     </div>
 
     <div class="hero-content container">
@@ -1016,28 +1000,21 @@
 
     elements.forEach((el) => observer.observe(el));
 
-    const hero = document.getElementById('hero');
-    const glow = document.querySelector('.hero-glow');
+    const heroFocus = document.getElementById('heroFocus');
 
-    function updateHeroGlow() {
-      const scrollY = window.scrollY;
-      const fadeStart = 20;
-      const fadeEnd = 520;
+    function updateHeroGlowSteps() {
+      const y = window.scrollY;
 
-      let progress = (scrollY - fadeStart) / (fadeEnd - fadeStart);
-      progress = Math.min(Math.max(progress, 0), 1);
+      heroFocus.classList.remove('step-1', 'step-2', 'step-3', 'step-4');
 
-      if (progress > 0.02) {
-        hero.classList.add('scrolled');
-      } else {
-        hero.classList.remove('scrolled');
-      }
-
-      glow.style.opacity = 1 - progress * 0.08;
+      if (y > 80) heroFocus.classList.add('step-1');
+      if (y > 170) heroFocus.classList.add('step-2');
+      if (y > 270) heroFocus.classList.add('step-3');
+      if (y > 380) heroFocus.classList.add('step-4');
     }
 
-    window.addEventListener('scroll', updateHeroGlow, { passive: true });
-    updateHeroGlow();
+    window.addEventListener('scroll', updateHeroGlowSteps, { passive: true });
+    updateHeroGlowSteps();
   </script>
 
 </body>
