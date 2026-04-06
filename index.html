@@ -19,9 +19,11 @@
       --muted: #A89F95;
       --accent: #8A6A4A;
       --hover-bg: rgba(138,106,74,0.12);
+
       --glow-1: rgba(167, 129, 92, 0.18);
-      --glow-2: rgba(167, 129, 92, 0.10);
-      --glow-3: rgba(167, 129, 92, 0.05);
+      --glow-2: rgba(167, 129, 92, 0.11);
+      --glow-3: rgba(167, 129, 92, 0.055);
+      --glow-4: rgba(167, 129, 92, 0.02);
     }
 
     * {
@@ -31,12 +33,15 @@
       scroll-behavior: smooth;
     }
 
+    html, body {
+      overflow-x: hidden;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
       background: linear-gradient(180deg, #12100E 0%, #15120F 100%);
       color: var(--text);
       line-height: 1.7;
-      overflow-x: hidden;
     }
 
     a {
@@ -53,7 +58,7 @@
     nav {
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 100;
       backdrop-filter: blur(12px);
       background: rgba(18, 16, 14, 0.72);
       border-bottom: 1px solid var(--line);
@@ -66,6 +71,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 20px;
     }
 
     .logo {
@@ -74,6 +80,7 @@
       letter-spacing: 0.2px;
       color: var(--text);
       opacity: 0.95;
+      white-space: nowrap;
     }
 
     .nav-links {
@@ -81,6 +88,8 @@
       gap: 26px;
       font-size: 14px;
       color: var(--muted);
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
     .nav-links a {
@@ -91,77 +100,128 @@
       color: var(--text);
     }
 
+    /* HERO */
     .hero {
-      min-height: 92vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       position: relative;
-      padding: 100px 0 80px;
+      padding: 110px 0 90px;
       overflow: hidden;
+      isolation: isolate;
     }
 
+    /* Большое мягкое живое свечение */
     .hero-glow {
       position: absolute;
       inset: 0;
       pointer-events: none;
       z-index: 0;
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      transition: opacity 0.7s ease, transform 0.7s ease, filter 0.7s ease;
     }
 
     .hero-glow::before,
-    .hero-glow::after {
+    .hero-glow::after,
+    .hero-glow .glow-core,
+    .hero-glow .glow-ring {
       content: "";
       position: absolute;
       left: 50%;
-      top: 46%;
+      top: 48%;
       transform: translate(-50%, -50%);
       border-radius: 50%;
-      filter: blur(30px);
-      transition: all 0.4s ease;
+      pointer-events: none;
+      transition: opacity 0.7s ease, transform 0.7s ease, filter 0.7s ease;
     }
 
-    .hero-glow::before {
+    /* центральное ядро */
+    .hero-glow .glow-core {
       width: 520px;
       height: 520px;
-      background:
-        radial-gradient(circle,
-          var(--glow-1) 0%,
-          var(--glow-2) 18%,
-          rgba(167,129,92,0.07) 35%,
-          rgba(167,129,92,0.03) 52%,
-          rgba(167,129,92,0.015) 68%,
-          rgba(167,129,92,0) 82%);
+      background: radial-gradient(circle,
+        var(--glow-1) 0%,
+        var(--glow-2) 18%,
+        rgba(167,129,92,0.08) 38%,
+        rgba(167,129,92,0.03) 60%,
+        rgba(167,129,92,0) 82%);
+      filter: blur(45px);
       opacity: 1;
-      animation: pulseGlow 6s ease-in-out infinite;
+      animation: pulseCore 6s ease-in-out infinite;
     }
 
+    /* средний ореол */
+    .hero-glow::before {
+      width: 950px;
+      height: 950px;
+      background: radial-gradient(circle,
+        rgba(167,129,92,0.085) 0%,
+        rgba(167,129,92,0.045) 22%,
+        rgba(167,129,92,0.02) 45%,
+        rgba(167,129,92,0.008) 60%,
+        rgba(167,129,92,0) 78%);
+      filter: blur(60px);
+      opacity: 0.95;
+      animation: pulseMid 8s ease-in-out infinite;
+    }
+
+    /* внешний ореол */
     .hero-glow::after {
-      width: 860px;
-      height: 860px;
-      background:
-        radial-gradient(circle,
-          rgba(167,129,92,0.05) 0%,
-          rgba(167,129,92,0.025) 24%,
-          rgba(167,129,92,0.012) 42%,
-          rgba(167,129,92,0.005) 58%,
-          rgba(167,129,92,0) 75%);
+      width: 1550px;
+      height: 1550px;
+      background: radial-gradient(circle,
+        rgba(167,129,92,0.03) 0%,
+        rgba(167,129,92,0.016) 18%,
+        rgba(167,129,92,0.008) 34%,
+        rgba(167,129,92,0.004) 48%,
+        rgba(167,129,92,0) 70%);
+      filter: blur(90px);
       opacity: 0.9;
-      animation: pulseGlowWide 8s ease-in-out infinite;
+      animation: pulseOuter 11s ease-in-out infinite;
+    }
+
+    /* лёгкое кольцо */
+    .hero-glow .glow-ring {
+      width: 1200px;
+      height: 1200px;
+      background: radial-gradient(circle,
+        rgba(167,129,92,0) 0%,
+        rgba(167,129,92,0) 28%,
+        rgba(167,129,92,0.018) 40%,
+        rgba(167,129,92,0.01) 52%,
+        rgba(167,129,92,0.003) 64%,
+        rgba(167,129,92,0) 78%);
+      filter: blur(55px);
+      opacity: 0.7;
+      animation: pulseRing 9s ease-in-out infinite;
+    }
+
+    .hero.scrolled .hero-glow .glow-core {
+      opacity: 0.38;
+      transform: translate(-50%, -50%) scale(0.92);
+      filter: blur(52px);
     }
 
     .hero.scrolled .hero-glow::before {
-      opacity: 0.45;
-      transform: translate(-50%, -50%) scale(0.94);
+      opacity: 0.28;
+      transform: translate(-50%, -50%) scale(0.95);
+      filter: blur(72px);
     }
 
     .hero.scrolled .hero-glow::after {
-      opacity: 0.30;
-      transform: translate(-50%, -50%) scale(0.96);
+      opacity: 0.16;
+      transform: translate(-50%, -50%) scale(0.98);
+      filter: blur(100px);
     }
 
-    @keyframes pulseGlow {
+    .hero.scrolled .hero-glow .glow-ring {
+      opacity: 0.14;
+      transform: translate(-50%, -50%) scale(0.96);
+      filter: blur(65px);
+    }
+
+    @keyframes pulseCore {
       0%, 100% {
         transform: translate(-50%, -50%) scale(1);
         opacity: 0.95;
@@ -172,21 +232,43 @@
       }
     }
 
-    @keyframes pulseGlowWide {
+    @keyframes pulseMid {
       0%, 100% {
         transform: translate(-50%, -50%) scale(1);
-        opacity: 0.65;
+        opacity: 0.82;
       }
       50% {
         transform: translate(-50%, -50%) scale(1.04);
-        opacity: 0.9;
+        opacity: 0.98;
+      }
+    }
+
+    @keyframes pulseOuter {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.7;
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.03);
+        opacity: 0.92;
+      }
+    }
+
+    @keyframes pulseRing {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.55;
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.05);
+        opacity: 0.8;
       }
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 900px;
+      max-width: 980px;
     }
 
     .hero-subtitle {
@@ -199,23 +281,30 @@
 
     .hero h1 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(62px, 10vw, 110px);
-      line-height: 0.92;
+      font-size: clamp(68px, 10vw, 118px);
+      line-height: 0.9;
       font-weight: 600;
-      margin-bottom: 26px;
+      margin-bottom: 28px;
       letter-spacing: -1px;
       text-shadow: 0 0 18px rgba(167,129,92,0.08);
     }
 
-    .hero p {
-      max-width: 660px;
+    .hero-intro {
+      max-width: 720px;
       margin: 0 auto;
       color: var(--muted);
-      font-size: 18px;
+      font-size: 19px;
+      line-height: 1.95;
+      letter-spacing: 0.01em;
+      text-wrap: balance;
+    }
+
+    .hero-intro .line {
+      display: block;
     }
 
     .buttons {
-      margin-top: 36px;
+      margin-top: 38px;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
@@ -235,6 +324,7 @@
       min-width: 190px;
       background: transparent;
       color: var(--text);
+      backdrop-filter: blur(6px);
     }
 
     .btn:hover {
@@ -539,21 +629,37 @@
 
       .hero {
         min-height: auto;
-        padding-top: 120px;
+        padding-top: 130px;
       }
 
       .nav-links {
         display: none;
       }
 
+      .hero-glow .glow-core {
+        width: 430px;
+        height: 430px;
+      }
+
       .hero-glow::before {
-        width: 420px;
-        height: 420px;
+        width: 760px;
+        height: 760px;
       }
 
       .hero-glow::after {
-        width: 700px;
-        height: 700px;
+        width: 1180px;
+        height: 1180px;
+      }
+
+      .hero-glow .glow-ring {
+        width: 920px;
+        height: 920px;
+      }
+
+      .hero-intro {
+        max-width: 650px;
+        font-size: 18px;
+        line-height: 1.85;
       }
     }
 
@@ -580,8 +686,14 @@
         min-width: 100%;
       }
 
-      .hero p {
+      .hero-intro {
         font-size: 16px;
+        line-height: 1.8;
+        max-width: 95%;
+      }
+
+      .logo {
+        font-size: 20px;
       }
     }
   </style>
@@ -602,15 +714,21 @@
   </nav>
 
   <section class="hero fade-up" id="hero">
-    <div class="hero-glow"></div>
+    <div class="hero-glow">
+      <div class="glow-core"></div>
+      <div class="glow-ring"></div>
+    </div>
 
     <div class="hero-content container">
       <div class="hero-subtitle">Инженер ПТО / Архитектор-дизайнер</div>
+
       <h1>Штыков<br>Андрей</h1>
-      <p>
-        Занимаюсь строительной документацией, архитектурными задачами и визуализацией.<br>
-        Люблю аккуратную работу, структуру и понятный результат.
-      </p>
+
+      <div class="hero-intro">
+        <span class="line">Занимаюсь строительной документацией,</span>
+        <span class="line">архитектурными задачами и визуализацией.</span>
+        <span class="line">Люблю аккуратную работу, структуру и понятный результат.</span>
+      </div>
 
       <div class="buttons">
         <a href="#projects" class="btn">Смотреть проекты</a>
@@ -886,13 +1004,26 @@
 
     const hero = document.getElementById('hero');
 
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 120) {
+    function updateHeroGlow() {
+      const scrollY = window.scrollY;
+      const fadeStart = 40;
+      const fadeEnd = 420;
+
+      let progress = (scrollY - fadeStart) / (fadeEnd - fadeStart);
+      progress = Math.min(Math.max(progress, 0), 1);
+
+      if (progress > 0.02) {
         hero.classList.add('scrolled');
       } else {
         hero.classList.remove('scrolled');
       }
-    });
+
+      const glow = document.querySelector('.hero-glow');
+      glow.style.opacity = 1 - progress * 0.18;
+    }
+
+    window.addEventListener('scroll', updateHeroGlow, { passive: true });
+    updateHeroGlow();
   </script>
 
 </body>
