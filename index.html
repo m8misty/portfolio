@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Портфолио</title>
+  <title>Андрей Штыков — Портфолио</title>
 
-  <!-- Шрифты -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -49,7 +48,6 @@
       padding: 0 24px;
     }
 
-    /* NAV */
     nav {
       position: sticky;
       top: 0;
@@ -90,7 +88,6 @@
       color: var(--text);
     }
 
-    /* HERO */
     .hero {
       min-height: 92vh;
       display: flex;
@@ -138,7 +135,7 @@
     }
 
     .hero p {
-      max-width: 720px;
+      max-width: 760px;
       margin: 0 auto;
       color: var(--muted);
       font-size: 18px;
@@ -186,7 +183,6 @@
       transform: translateY(-2px);
     }
 
-    /* SECTION */
     section {
       padding: 110px 0;
       border-top: 1px solid var(--line);
@@ -222,7 +218,6 @@
       font-size: 15px;
     }
 
-    /* CARDS */
     .card {
       background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
       border: 1px solid var(--line);
@@ -236,7 +231,6 @@
       border-color: rgba(232, 226, 217, 0.14);
     }
 
-    /* ABOUT */
     .about-grid {
       display: grid;
       grid-template-columns: 1.3fr 0.9fr;
@@ -280,7 +274,6 @@
       font-size: 15px;
     }
 
-    /* SKILLS */
     .grid {
       display: grid;
       gap: 22px;
@@ -305,7 +298,6 @@
       font-size: 15px;
     }
 
-    /* EXPERIENCE */
     .timeline {
       display: grid;
       gap: 18px;
@@ -343,7 +335,6 @@
       font-size: 15px;
     }
 
-    /* PROJECTS */
     .project {
       overflow: hidden;
       border-radius: 26px;
@@ -402,7 +393,6 @@
       margin-top: 6px;
     }
 
-    /* CONTACT */
     .contact-wrap {
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
@@ -450,9 +440,9 @@
     .contact-value {
       font-size: 16px;
       color: var(--text);
+      word-break: break-word;
     }
 
-    /* FOOTER */
     footer {
       border-top: 1px solid var(--line);
       padding: 28px 24px 40px;
@@ -461,7 +451,6 @@
       font-size: 13px;
     }
 
-    /* ANIMATIONS */
     .fade-up {
       opacity: 0;
       transform: translateY(34px);
@@ -474,7 +463,6 @@
       transform: translateY(0);
     }
 
-    /* RESPONSIVE */
     @media (max-width: 980px) {
       .about-grid,
       .contact-wrap,
@@ -521,10 +509,9 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <div class="nav-inner">
-      <div class="logo">Portfolio</div>
+      <div class="logo">A.S.</div>
       <div class="nav-links">
         <a href="#about">Обо мне</a>
         <a href="#skills">Навыки</a>
@@ -535,14 +522,13 @@
     </div>
   </nav>
 
-  <!-- HERO -->
   <section class="hero fade-up">
     <div class="hero-content container">
-      <div class="hero-subtitle">Архитектор / инженер-строитель</div>
-      <h1>Имя<br>Фамилия</h1>
+      <div class="hero-subtitle">Инженер ПТО / Архитектор</div>
+      <h1>Андрей<br>Штыков</h1>
       <p>
-        Проектирование, рабочая документация, фасадные решения, координация разделов
-        и визуальная подача архитектурных проектов.
+        Исполнительная и проектная документация, фасадные решения, узлы,
+        архитектурные проекты и визуализация. Опыт работы в строительстве и проектировании.
       </p>
 
       <div class="buttons">
@@ -553,105 +539,126 @@
     </div>
   </section>
 
-  <!-- ABOUT -->
   <section id="about" class="fade-up">
     <div class="container">
       <div class="section-head">
         <div>
           <div class="section-label">Обо мне</div>
-          <h2>Строгая подача без лишнего шума</h2>
+          <h2>Строительная документация и архитектурная практика</h2>
         </div>
         <div class="section-desc">
-          Этот блок потом заполним твоими реальными данными из hh и портфолио.
+          Сайт-портфолио, который совмещает резюме, опыт и реальные рабочие направления.
         </div>
       </div>
 
       <div class="about-grid">
         <div class="card about-main">
           <p>
-            Здесь будет твой нормальный человеческий текст о себе: кто ты, чем занимаешься,
-            какие задачи умеешь решать, на чём специализируешься и в каком направлении хочешь расти.
+            Инженер ПТО с опытом работы с исполнительной и проектной документацией.
+            Работаю с актами скрытых работ, исполнительными схемами, журналами работ
+            и технической документацией по строительным объектам.
           </p>
           <p>
-            Важно, чтобы это читалось не как “я ответственный и стрессоустойчивый”,
-            а как описание реальной пользы, которую ты можешь дать проекту или команде.
+            Параллельно занимаюсь архитектурными проектами: разработка АР части,
+            каркасные дома, визуализации, планировки и узлы. Уверенно работаю в AutoCAD,
+            Revit и Archicad, хорошо ориентируюсь в строительной нормативной базе.
           </p>
         </div>
 
         <div class="card mini-list">
           <div class="mini-item">
-            <div class="mini-title">Локация</div>
-            <div class="mini-value">Рига / удалённо / релокация</div>
+            <div class="mini-title">Формат</div>
+            <div class="mini-value">Полная / частичная / проектная занятость</div>
           </div>
           <div class="mini-item">
-            <div class="mini-title">Софт</div>
-            <div class="mini-value">AutoCAD, Revit, ArchiCAD, SketchUp</div>
+            <div class="mini-title">Работа</div>
+            <div class="mini-value">Удалённо / на месте работодателя</div>
           </div>
           <div class="mini-item">
-            <div class="mini-title">Фокус</div>
-            <div class="mini-value">Рабочая документация, фасады, узлы</div>
+            <div class="mini-title">Готовность</div>
+            <div class="mini-value">Готов к переезду и редким командировкам</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SKILLS -->
   <section id="skills" class="fade-up">
     <div class="container">
       <div class="section-head">
         <div>
           <div class="section-label">Навыки</div>
-          <h2>Инструменты и практика</h2>
+          <h2>Инструменты и рабочая практика</h2>
         </div>
         <div class="section-desc">
-          Тут потом можно будет аккуратно разложить всё, что у тебя есть по делу.
+          Не просто “знаю программы”, а набор реальных рабочих задач и инструментов.
         </div>
       </div>
 
       <div class="grid grid-2">
         <div class="card">
           <div class="skill-title">Проектирование</div>
-          <div class="skill-list">AutoCAD, Revit, ArchiCAD, оформление документации, корректировка чертежей</div>
+          <div class="skill-list">
+            AutoCAD, Revit, Archicad, разработка проектной и рабочей документации
+          </div>
+        </div>
+        <div class="card">
+          <div class="skill-title">Исполнительная документация</div>
+          <div class="skill-list">
+            АОСР, исполнительные схемы, журналы работ, проверка документации
+          </div>
+        </div>
+        <div class="card">
+          <div class="skill-title">Архитектура</div>
+          <div class="skill-list">
+            АР раздел, каркасные дома, планировки, узлы, малоэтажное строительство
+          </div>
         </div>
         <div class="card">
           <div class="skill-title">Визуализация</div>
-          <div class="skill-list">SketchUp, Photoshop, подача проектных решений, визуальная структура</div>
-        </div>
-        <div class="card">
-          <div class="skill-title">Практика</div>
-          <div class="skill-list">Фасадные решения, узлы, рабочие разделы, координация со смежниками</div>
-        </div>
-        <div class="card">
-          <div class="skill-title">Дополнительно</div>
-          <div class="skill-list">Excel, работа с PDF, проверка комплектов, структурирование информации</div>
+          <div class="skill-list">
+            SketchUp, Photoshop, 3D моделирование, подача проектных решений
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
   <section id="experience" class="fade-up">
     <div class="container">
       <div class="section-head">
         <div>
           <div class="section-label">Опыт</div>
-          <h2>Что ты уже делал</h2>
+          <h2>Практика в строительстве и проектировании</h2>
         </div>
         <div class="section-desc">
-          Это важный блок — он как раз и заменяет обычное hh-резюме.
+          Кратко и по делу — чтобы было видно, что именно ты делал, а не просто где работал.
         </div>
       </div>
 
       <div class="timeline">
         <div class="card timeline-item">
-          <div class="timeline-date">2024 — 2025</div>
+          <div class="timeline-date">2025 — настоящее время</div>
           <div>
-            <div class="timeline-role">Стажёр / помощник проектировщика</div>
-            <div class="timeline-company">Компания / бюро / практика</div>
+            <div class="timeline-role">Инженер ПТО</div>
+            <div class="timeline-company">Новый век (Инкотек)</div>
             <div class="timeline-desc">
-              Участие в подготовке рабочей документации, корректировке проектных решений,
-              оформлении чертежей и сопровождении задач по разделу.
+              Ведение исполнительной документации по фасадным системам (СФТК, НФС).
+              Подготовка исполнительных схем, актов скрытых работ (АОСР), журналов работ.
+              Контроль корректности документации, взаимодействие с подрядчиками и проверка соответствия проекту.
+            </div>
+          </div>
+        </div>
+
+        <div class="card timeline-item">
+          <div class="timeline-date">2023 — настоящее время</div>
+          <div>
+            <div class="timeline-role">Архитектор</div>
+            <div class="timeline-company">RUSKI</div>
+            <div class="timeline-desc">
+              Разработка архитектурного раздела (АР) каркасных домов.
+              Работа с планировками, фасадами и узлами, подготовка чертежей и проектных решений.
+              Создание 3D моделей и визуализаций для представления проектов.
             </div>
           </div>
         </div>
@@ -659,11 +666,35 @@
         <div class="card timeline-item">
           <div class="timeline-date">2023 — 2024</div>
           <div>
-            <div class="timeline-role">Учебные и личные проекты</div>
-            <div class="timeline-company">Архитектурная / инженерная практика</div>
+            <div class="timeline-role">Архитектор-дизайнер</div>
+            <div class="timeline-company">Manera Design</div>
             <div class="timeline-desc">
-              Работа с планировками, фасадами, узлами, подачей проектов и структурированием материалов
-              для портфолио и презентации.
+              Разработка и оформление проектных альбомов.
+              Создание 3D моделей, коллажей и визуализаций.
+              Подготовка чертежей планировок и узлов, взаимодействие с заказчиком и застройщиками.
+            </div>
+          </div>
+        </div>
+
+        <div class="card timeline-item">
+          <div class="timeline-date">2023</div>
+          <div>
+            <div class="timeline-role">Архитектор-дизайнер</div>
+            <div class="timeline-company">Студия интерьера Moonlight</div>
+            <div class="timeline-desc">
+              Подготовка чертежей, проработка узлов и мебели, участие в интерьерных проектных задачах.
+            </div>
+          </div>
+        </div>
+
+        <div class="card timeline-item">
+          <div class="timeline-date">2023</div>
+          <div>
+            <div class="timeline-role">Младший инженер</div>
+            <div class="timeline-company">MIC System</div>
+            <div class="timeline-desc">
+              Подготовка и корректировка чертежей, сборка узлов и оформление технической документации.
+              Работа с исходными данными и приведение чертежей к рабочему виду.
             </div>
           </div>
         </div>
@@ -671,16 +702,15 @@
     </div>
   </section>
 
-  <!-- PROJECTS -->
   <section id="projects" class="fade-up">
     <div class="container">
       <div class="section-head">
         <div>
           <div class="section-label">Проекты</div>
-          <h2>Избранные работы</h2>
+          <h2>Избранные направления</h2>
         </div>
         <div class="section-desc">
-          Здесь потом будут уже твои реальные проекты с картинками и нормальными описаниями.
+          Пока здесь базовые карточки. Потом подставим реальные проекты с твоими изображениями.
         </div>
       </div>
 
@@ -688,67 +718,66 @@
         <div class="project">
           <div class="project-image">Project Preview</div>
           <div class="project-content">
-            <div class="project-title">Проект 01</div>
+            <div class="project-title">Каркасный дом</div>
             <div class="project-text">
-              Краткое описание проекта, твоя роль, что делал и в чём была задача.
+              Разработка архитектурного раздела, планировки, фасады, визуализация.
             </div>
-            <span class="project-tag">Фасады</span>
-            <span class="project-tag">Рабочая документация</span>
+            <span class="project-tag">АР</span>
+            <span class="project-tag">Малоэтажка</span>
           </div>
         </div>
 
         <div class="project">
           <div class="project-image">Project Preview</div>
           <div class="project-content">
-            <div class="project-title">Проект 02</div>
+            <div class="project-title">Фасадная документация</div>
             <div class="project-text">
-              Ещё один кейс — лучше коротко, но по делу, чем много бессмысленного текста.
+              Подготовка исполнительных схем и документации по фасадным системам СФТК и НФС.
             </div>
-            <span class="project-tag">Узлы</span>
-            <span class="project-tag">Координация</span>
+            <span class="project-tag">ПТО</span>
+            <span class="project-tag">Исполнительная</span>
           </div>
         </div>
 
         <div class="project">
           <div class="project-image">Project Preview</div>
           <div class="project-content">
-            <div class="project-title">Проект 03</div>
+            <div class="project-title">Интерьерный проект</div>
             <div class="project-text">
-              Здесь можно будет показать учебный, личный или рабочий проект — если он хорошо подан.
+              Планировки, узлы, мебель, визуализация и оформление альбома.
             </div>
+            <span class="project-tag">Интерьер</span>
             <span class="project-tag">Визуализация</span>
-            <span class="project-tag">Подача</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contacts" class="fade-up">
     <div class="container">
       <div class="contact-wrap">
         <div>
           <div class="section-label">Контакты</div>
-          <div class="contact-big">Готов к новым задачам и нормальной работе.</div>
+          <div class="contact-big">Открыт к сильным проектам и нормальной работе.</div>
           <div class="contact-text">
-            Этот блок потом можно сделать реально рабочим: чтобы тебе можно было написать,
-            открыть hh, скачать резюме или перейти в Telegram.
+            Связаться можно напрямую по почте, телефону или через резюме.
+            Позже сюда добавим PDF и при желании Telegram / hh.
           </div>
         </div>
 
         <div class="contact-list">
           <div class="contact-item">
             <div class="contact-label">Email</div>
-            <div class="contact-value">yourmail@example.com</div>
+            <div class="contact-value">andrew.shtykov@gmail.com</div>
           </div>
           <div class="contact-item">
-            <div class="contact-label">Telegram</div>
-            <div class="contact-value">@yourusername</div>
+            <div class="contact-label">Телефон</div>
+            <div class="contact-value">+7 (996) 231-16-01</div>
           </div>
           <div class="contact-item">
-            <div class="contact-label">Резюме</div>
-            <div class="contact-value">Скачать PDF / ссылка на hh</div>
+            <div class="contact-label">Сайт</div>
+            <div class="contact-value">m8misty.github.io/portfolio</div>
           </div>
         </div>
       </div>
@@ -756,7 +785,7 @@
   </section>
 
   <footer>
-    © 2026 Portfolio
+    © 2026 Андрей Штыков
   </footer>
 
   <script>
