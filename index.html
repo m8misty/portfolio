@@ -17,6 +17,7 @@
       --line: rgba(232, 226, 217, 0.08);
       --text: #E8E2D9;
       --muted: #A89F95;
+      --muted-hero: #B9ACA0;
       --accent: #8A6A4A;
       --hover-bg: rgba(138,106,74,0.12);
     }
@@ -37,6 +38,8 @@
       background: linear-gradient(180deg, #12100E 0%, #15120F 100%);
       color: var(--text);
       line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
     a {
@@ -52,48 +55,96 @@
 
     /* NAV */
     nav {
-      position: sticky;
-      top: 0;
+      position: fixed;
+      top: 16px;
+      left: 0;
+      width: 100%;
       z-index: 100;
-      backdrop-filter: blur(12px);
-      background: rgba(18, 16, 14, 0.72);
-      border-bottom: 1px solid var(--line);
+      pointer-events: none;
+      transition: transform 0.45s ease, opacity 0.35s ease;
     }
 
     .nav-inner {
-      max-width: 1160px;
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 18px 24px;
+      padding: 16px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 20px;
+      border: 1px solid rgba(232, 226, 217, 0.08);
+      border-radius: 22px;
+      background: rgba(18, 16, 14, 0.44);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow:
+        0 8px 30px rgba(0,0,0,0.18),
+        inset 0 1px 0 rgba(255,255,255,0.02);
+      pointer-events: auto;
+      transition:
+        padding 0.35s ease,
+        background 0.35s ease,
+        border-color 0.35s ease,
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+    }
+
+    nav.scrolled {
+      transform: translateY(-4px);
+    }
+
+    nav.scrolled .nav-inner {
+      padding: 12px 22px;
+      background: rgba(18, 16, 14, 0.62);
+      border-color: rgba(232, 226, 217, 0.11);
+      box-shadow:
+        0 12px 36px rgba(0,0,0,0.24),
+        inset 0 1px 0 rgba(255,255,255,0.025);
     }
 
     .logo {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 24px;
-      letter-spacing: 0.2px;
+      font-size: 27px;
+      letter-spacing: 0.01em;
       color: var(--text);
-      opacity: 0.95;
+      opacity: 0.97;
       white-space: nowrap;
+      line-height: 1;
     }
 
     .nav-links {
       display: flex;
-      gap: 26px;
-      font-size: 14px;
-      color: var(--muted);
+      gap: 28px;
+      font-size: 15px;
+      color: var(--muted-hero);
       flex-wrap: wrap;
       justify-content: flex-end;
+      font-weight: 400;
+      letter-spacing: 0.01em;
     }
 
     .nav-links a {
       transition: 0.25s ease;
+      position: relative;
     }
 
     .nav-links a:hover {
       color: var(--text);
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 1px;
+      background: rgba(232, 226, 217, 0.55);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
     }
 
     /* HERO */
@@ -104,7 +155,7 @@
       justify-content: center;
       text-align: center;
       position: relative;
-      padding: 110px 0 90px;
+      padding: 150px 0 90px;
       overflow: hidden;
       isolation: isolate;
     }
@@ -115,7 +166,7 @@
       max-width: 980px;
     }
 
-    /* ОДНО ЦЕЛЬНОЕ ПЯТНО СО СТУПЕНЯМИ — В СТИЛЕ КАРТОЧЕК */
+    /* СВЕЧЕНИЕ */
     .hero-focus {
       position: absolute;
       left: 50%;
@@ -143,7 +194,6 @@
       mix-blend-mode: screen;
     }
 
-    /* ВНЕШНИЙ МЯГКИЙ ОБЪЁМ */
     .ring-outer {
       width: 940px;
       height: 940px;
@@ -162,7 +212,6 @@
       animation: breatheOuter 10s ease-in-out infinite;
     }
 
-    /* ВТОРАЯ СТУПЕНЬ */
     .ring-mid-2 {
       width: 760px;
       height: 760px;
@@ -181,7 +230,6 @@
       animation: breatheMid2 8.5s ease-in-out infinite;
     }
 
-    /* ТРЕТЬЯ СТУПЕНЬ */
     .ring-mid-1 {
       width: 560px;
       height: 560px;
@@ -199,7 +247,6 @@
       animation: breatheMid1 7s ease-in-out infinite;
     }
 
-    /* ЦЕНТРАЛЬНОЕ ЯДРО */
     .ring-core {
       width: 320px;
       height: 320px;
@@ -216,7 +263,6 @@
       animation: breatheCore 5.5s ease-in-out infinite;
     }
 
-    /* ДОПОЛНИТЕЛЬНЫЙ ВЕРТИКАЛЬНЫЙ ШЛЕЙФ КАК НА КАРТОЧКАХ */
     .hero-focus::before {
       content: "";
       position: absolute;
@@ -241,7 +287,6 @@
       z-index: 0;
     }
 
-    /* МЯГКОЕ ДЫХАНИЕ */
     @keyframes breatheOuter {
       0%,100% { transform: translate(-50%, -50%) scale(1); }
       50% { transform: translate(-50%, -50%) scale(1.015); }
@@ -262,7 +307,6 @@
       50% { transform: translate(-50%, -50%) scale(1.03); }
     }
 
-    /* ПОЭТАПНОЕ ЗАТУХАНИЕ ПРИ СКРОЛЛЕ */
     .hero-focus.step-1 .ring-outer {
       opacity: 0.28;
       transform: translate(-50%, -50%) scale(0.985);
@@ -288,20 +332,22 @@
     }
 
     .hero-subtitle {
-      color: var(--gold-soft);
+      color: var(--muted-hero);
       text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 12px;
-      margin-bottom: 24px;
+      letter-spacing: 0.18em;
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 26px;
+      opacity: 0.96;
     }
 
     .hero h1 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(68px, 10vw, 118px);
-      line-height: 0.9;
+      font-size: clamp(72px, 10vw, 118px);
+      line-height: 0.92;
       font-weight: 600;
-      margin-bottom: 34px;
-      letter-spacing: -1px;
+      margin-bottom: 28px;
+      letter-spacing: -0.02em;
       text-shadow:
         0 0 18px rgba(194, 145, 95, 0.05),
         0 0 34px rgba(194, 145, 95, 0.03);
@@ -310,15 +356,16 @@
     }
 
     .hero-intro {
-      max-width: 700px;
+      max-width: 690px;
       margin: 0 auto;
-      color: var(--gold-soft);
-      font-size: 20px;
-      line-height: 1.95;
+      color: var(--muted-hero);
+      font-size: 22px;
+      line-height: 1.8;
       letter-spacing: 0.01em;
       text-wrap: balance;
       position: relative;
       z-index: 3;
+      font-weight: 400;
     }
 
     .hero-intro .line {
@@ -326,7 +373,7 @@
     }
 
     .buttons {
-      margin-top: 48px;
+      margin-top: 46px;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
@@ -374,24 +421,28 @@
     }
 
     .section-label {
-      color: #B89672;
+      color: #B9ACA0;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 12px;
-      margin-bottom: 10px;
+      letter-spacing: 0.16em;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 12px;
+      opacity: 0.95;
     }
 
     h2 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(34px, 5vw, 58px);
-      line-height: 1;
+      font-size: clamp(40px, 5vw, 58px);
+      line-height: 1.02;
       font-weight: 600;
+      letter-spacing: -0.01em;
     }
 
     .section-desc {
-      max-width: 460px;
-      color: var(--muted);
-      font-size: 15px;
+      max-width: 500px;
+      color: var(--muted-hero);
+      font-size: 16px;
+      line-height: 1.8;
     }
 
     .card {
@@ -416,6 +467,7 @@
     .about-main {
       font-size: 17px;
       color: var(--text);
+      line-height: 1.95;
     }
 
     .about-main p + p {
@@ -440,7 +492,7 @@
     .mini-title {
       font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 1.6px;
+      letter-spacing: 0.14em;
       color: var(--muted);
       margin-bottom: 6px;
     }
@@ -448,6 +500,7 @@
     .mini-value {
       color: var(--text);
       font-size: 15px;
+      line-height: 1.7;
     }
 
     .grid {
@@ -465,13 +518,15 @@
 
     .skill-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 30px;
+      font-size: 32px;
       margin-bottom: 14px;
+      line-height: 1;
     }
 
     .skill-list {
-      color: var(--muted);
-      font-size: 15px;
+      color: var(--muted-hero);
+      font-size: 16px;
+      line-height: 1.8;
     }
 
     .timeline {
@@ -490,25 +545,27 @@
       color: var(--muted);
       font-size: 13px;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
+      letter-spacing: 0.14em;
       padding-top: 4px;
     }
 
     .timeline-role {
-      font-size: 22px;
+      font-size: 26px;
       font-family: 'Cormorant Garamond', serif;
       margin-bottom: 8px;
+      line-height: 1;
     }
 
     .timeline-company {
-      color: var(--muted);
+      color: var(--muted-hero);
       margin-bottom: 12px;
-      font-size: 14px;
+      font-size: 15px;
     }
 
     .timeline-desc {
       color: var(--text);
-      font-size: 15px;
+      font-size: 16px;
+      line-height: 1.85;
     }
 
     .project {
@@ -538,7 +595,7 @@
       padding: 22px;
       color: rgba(232, 226, 217, 0.5);
       font-size: 14px;
-      letter-spacing: 1px;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
@@ -548,14 +605,16 @@
 
     .project-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 30px;
+      font-size: 32px;
       margin-bottom: 10px;
+      line-height: 1;
     }
 
     .project-text {
-      color: var(--muted);
-      font-size: 15px;
+      color: var(--muted-hero);
+      font-size: 16px;
       margin-bottom: 16px;
+      line-height: 1.8;
     }
 
     .project-tag {
@@ -567,6 +626,7 @@
       padding: 7px 12px;
       margin-right: 8px;
       margin-top: 6px;
+      letter-spacing: 0.04em;
     }
 
     .contact-wrap {
@@ -577,14 +637,16 @@
 
     .contact-big {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(34px, 6vw, 62px);
+      font-size: clamp(38px, 6vw, 62px);
       line-height: 0.98;
       margin-bottom: 18px;
     }
 
     .contact-text {
-      color: var(--muted);
+      color: var(--muted-hero);
       max-width: 560px;
+      font-size: 16px;
+      line-height: 1.85;
     }
 
     .contact-list {
@@ -608,7 +670,7 @@
     .contact-label {
       font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 1.6px;
+      letter-spacing: 0.14em;
       color: var(--muted);
       margin-bottom: 6px;
     }
@@ -624,7 +686,7 @@
       padding: 28px 24px 40px;
       text-align: center;
       color: var(--muted);
-      font-size: 13px;
+      font-size: 14px;
     }
 
     .fade-up {
@@ -654,7 +716,7 @@
 
       .hero {
         min-height: auto;
-        padding-top: 130px;
+        padding-top: 150px;
       }
 
       .nav-links {
@@ -678,12 +740,25 @@
 
       .hero-intro {
         max-width: 650px;
-        font-size: 18px;
+        font-size: 19px;
         line-height: 1.8;
       }
     }
 
     @media (max-width: 640px) {
+      nav {
+        top: 10px;
+      }
+
+      .nav-inner {
+        border-radius: 18px;
+        padding: 14px 18px;
+      }
+
+      .logo {
+        font-size: 22px;
+      }
+
       .hero h1 {
         line-height: 0.98;
       }
@@ -706,14 +781,15 @@
         min-width: 100%;
       }
 
-      .hero-intro {
-        font-size: 16px;
-        line-height: 1.75;
-        max-width: 95%;
+      .hero-subtitle {
+        font-size: 13px;
+        letter-spacing: 0.16em;
       }
 
-      .logo {
-        font-size: 20px;
+      .hero-intro {
+        font-size: 17px;
+        line-height: 1.75;
+        max-width: 95%;
       }
 
       .hero-focus {
@@ -735,7 +811,7 @@
 </head>
 <body>
 
-  <nav>
+  <nav id="siteNav">
     <div class="nav-inner">
       <div class="logo">Приложение к резюме hh.ru</div>
       <div class="nav-links">
@@ -1040,6 +1116,7 @@
     elements.forEach((el) => observer.observe(el));
 
     const heroFocus = document.getElementById('heroFocus');
+    const siteNav = document.getElementById('siteNav');
 
     function updateHeroGlowSteps() {
       const y = window.scrollY;
@@ -1050,6 +1127,12 @@
       if (y > 190) heroFocus.classList.add('step-2');
       if (y > 300) heroFocus.classList.add('step-3');
       if (y > 420) heroFocus.classList.add('step-4');
+
+      if (y > 24) {
+        siteNav.classList.add('scrolled');
+      } else {
+        siteNav.classList.remove('scrolled');
+      }
     }
 
     window.addEventListener('scroll', updateHeroGlowSteps, { passive: true });
