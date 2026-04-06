@@ -19,8 +19,6 @@
       --muted: #A89F95;
       --accent: #8A6A4A;
       --hover-bg: rgba(138,106,74,0.12);
-      --gold: #C2915F;
-      --gold-soft: #B89672;
     }
 
     * {
@@ -113,261 +111,184 @@
 
     .hero-content {
       position: relative;
-      z-index: 5;
+      z-index: 3;
       max-width: 980px;
     }
 
-    /* КОСМИЧЕСКОЕ ЖИВОЕ СВЕЧЕНИЕ */
+    /* ОДНО ЦЕЛЬНОЕ ПЯТНО СО СТУПЕНЯМИ — В СТИЛЕ КАРТОЧЕК */
     .hero-focus {
       position: absolute;
       left: 50%;
       top: 52%;
       transform: translate(-50%, -50%);
-      width: min(96vw, 1100px);
-      height: min(96vw, 1100px);
+      width: min(92vw, 980px);
+      height: min(92vw, 980px);
       pointer-events: none;
       z-index: 1;
       opacity: 1;
       transition: opacity 0.5s ease;
-      filter: blur(22px);
     }
 
-    .hero-focus .layer {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      pointer-events: none;
-      transition:
-        opacity 0.85s ease,
-        transform 1s ease,
-        filter 1s ease;
-      mix-blend-mode: screen;
-    }
-
-    /* ВНЕШНИЙ СЛОЙ */
-    .nebula-1 {
-      background:
-        radial-gradient(ellipse at 50% 50%,
-          rgba(194,145,95,0.00) 0%,
-          rgba(194,145,95,0.01) 18%,
-          rgba(194,145,95,0.04) 36%,
-          rgba(194,145,95,0.07) 52%,
-          rgba(194,145,95,0.05) 66%,
-          rgba(194,145,95,0.02) 82%,
-          rgba(194,145,95,0.00) 100%);
-      clip-path: polygon(
-        48% 4%, 59% 6%, 69% 10%, 78% 18%, 87% 25%, 91% 36%, 96% 47%, 93% 58%,
-        97% 70%, 92% 80%, 84% 88%, 73% 93%, 61% 96%, 50% 98%, 39% 96%, 28% 94%,
-        18% 89%, 11% 80%, 7% 69%, 5% 57%, 4% 46%, 7% 34%, 11% 24%, 18% 16%,
-        28% 10%, 38% 7%
-      );
-      animation: morph1 12s ease-in-out infinite, breathe1 8s ease-in-out infinite;
-      opacity: 1;
-    }
-
-    /* СРЕДНИЙ СЛОЙ */
-    .nebula-2 {
-      inset: 10%;
-      background:
-        radial-gradient(ellipse at 50% 50%,
-          rgba(194,145,95,0.00) 0%,
-          rgba(194,145,95,0.03) 18%,
-          rgba(194,145,95,0.09) 34%,
-          rgba(194,145,95,0.14) 52%,
-          rgba(194,145,95,0.08) 68%,
-          rgba(194,145,95,0.03) 84%,
-          rgba(194,145,95,0.00) 100%);
-      clip-path: polygon(
-        47% 6%, 58% 9%, 67% 12%, 75% 18%, 84% 27%, 88% 38%, 92% 49%, 90% 60%,
-        91% 70%, 86% 79%, 78% 87%, 68% 91%, 58% 94%, 48% 95%, 38% 93%, 28% 90%,
-        19% 84%, 13% 75%, 10% 65%, 9% 54%, 11% 43%, 13% 32%, 19% 23%, 28% 16%,
-        37% 10%
-      );
-      animation: morph2 10s ease-in-out infinite, breathe2 6.5s ease-in-out infinite;
-      opacity: 1;
-    }
-
-    /* ВНУТРЕННИЙ СЛОЙ */
-    .nebula-3 {
-      inset: 22%;
-      background:
-        radial-gradient(ellipse at 50% 50%,
-          rgba(194,145,95,0.18) 0%,
-          rgba(194,145,95,0.16) 18%,
-          rgba(194,145,95,0.13) 34%,
-          rgba(194,145,95,0.08) 54%,
-          rgba(194,145,95,0.04) 74%,
-          rgba(194,145,95,0.00) 100%);
-      clip-path: polygon(
-        49% 8%, 58% 11%, 66% 16%, 74% 23%, 80% 31%, 84% 42%, 86% 51%, 84% 61%,
-        81% 70%, 75% 79%, 67% 85%, 58% 89%, 49% 91%, 40% 89%, 31% 85%, 23% 79%,
-        17% 71%, 14% 61%, 13% 51%, 14% 41%, 18% 31%, 24% 23%, 32% 16%, 40% 11%
-      );
-      animation: morph3 8s ease-in-out infinite, breathe3 5.2s ease-in-out infinite;
-      opacity: 1;
-    }
-
-    /* ЯДРО */
-    .nebula-core {
+    .hero-focus .ring {
       position: absolute;
       left: 50%;
       top: 50%;
-      width: 230px;
-      height: 230px;
       transform: translate(-50%, -50%);
       border-radius: 50%;
-      background:
-        radial-gradient(circle,
-          rgba(194,145,95,0.34) 0%,
-          rgba(194,145,95,0.22) 22%,
-          rgba(194,145,95,0.13) 44%,
-          rgba(194,145,95,0.06) 68%,
-          rgba(194,145,95,0.00) 100%);
-      filter: blur(12px);
-      mix-blend-mode: screen;
-      animation: corePulse 4.2s ease-in-out infinite;
+      pointer-events: none;
       transition:
-        opacity 0.85s ease,
-        transform 1s ease,
-        filter 1s ease;
+        opacity 0.75s ease,
+        transform 0.85s ease,
+        filter 0.85s ease;
+      mix-blend-mode: screen;
     }
 
-    /* ШЛЕЙФ */
+    /* ВНЕШНИЙ МЯГКИЙ ОБЪЁМ */
+    .ring-outer {
+      width: 940px;
+      height: 940px;
+      background:
+        radial-gradient(circle,
+          rgba(145, 99, 58, 0.000) 0%,
+          rgba(145, 99, 58, 0.000) 14%,
+          rgba(145, 99, 58, 0.020) 26%,
+          rgba(145, 99, 58, 0.040) 40%,
+          rgba(145, 99, 58, 0.060) 54%,
+          rgba(145, 99, 58, 0.040) 68%,
+          rgba(145, 99, 58, 0.018) 82%,
+          rgba(145, 99, 58, 0.000) 100%);
+      filter: blur(40px);
+      opacity: 0.98;
+      animation: breatheOuter 10s ease-in-out infinite;
+    }
+
+    /* ВТОРАЯ СТУПЕНЬ */
+    .ring-mid-2 {
+      width: 760px;
+      height: 760px;
+      background:
+        radial-gradient(circle,
+          rgba(156, 108, 65, 0.000) 0%,
+          rgba(156, 108, 65, 0.000) 12%,
+          rgba(156, 108, 65, 0.030) 24%,
+          rgba(156, 108, 65, 0.060) 40%,
+          rgba(156, 108, 65, 0.090) 54%,
+          rgba(156, 108, 65, 0.060) 68%,
+          rgba(156, 108, 65, 0.024) 82%,
+          rgba(156, 108, 65, 0.000) 100%);
+      filter: blur(32px);
+      opacity: 0.96;
+      animation: breatheMid2 8.5s ease-in-out infinite;
+    }
+
+    /* ТРЕТЬЯ СТУПЕНЬ */
+    .ring-mid-1 {
+      width: 560px;
+      height: 560px;
+      background:
+        radial-gradient(circle,
+          rgba(170, 120, 72, 0.000) 0%,
+          rgba(170, 120, 72, 0.020) 16%,
+          rgba(170, 120, 72, 0.055) 32%,
+          rgba(170, 120, 72, 0.110) 50%,
+          rgba(170, 120, 72, 0.070) 66%,
+          rgba(170, 120, 72, 0.028) 82%,
+          rgba(170, 120, 72, 0.000) 100%);
+      filter: blur(26px);
+      opacity: 1;
+      animation: breatheMid1 7s ease-in-out infinite;
+    }
+
+    /* ЦЕНТРАЛЬНОЕ ЯДРО */
+    .ring-core {
+      width: 320px;
+      height: 320px;
+      background:
+        radial-gradient(circle,
+          rgba(194, 145, 95, 0.240) 0%,
+          rgba(194, 145, 95, 0.190) 18%,
+          rgba(194, 145, 95, 0.130) 36%,
+          rgba(194, 145, 95, 0.075) 56%,
+          rgba(194, 145, 95, 0.028) 78%,
+          rgba(194, 145, 95, 0.000) 100%);
+      filter: blur(18px);
+      opacity: 1;
+      animation: breatheCore 5.5s ease-in-out infinite;
+    }
+
+    /* ДОПОЛНИТЕЛЬНЫЙ ВЕРТИКАЛЬНЫЙ ШЛЕЙФ КАК НА КАРТОЧКАХ */
     .hero-focus::before {
       content: "";
       position: absolute;
       left: 50%;
-      top: 50%;
+      top: 48%;
       transform: translate(-50%, -50%);
-      width: 460px;
-      height: 860px;
+      width: 420px;
+      height: 820px;
       background:
         linear-gradient(
           180deg,
-          rgba(194,145,95,0.09) 0%,
-          rgba(194,145,95,0.06) 18%,
-          rgba(194,145,95,0.04) 34%,
-          rgba(194,145,95,0.02) 52%,
-          rgba(194,145,95,0.00) 100%
+          rgba(173, 121, 72, 0.065) 0%,
+          rgba(173, 121, 72, 0.045) 18%,
+          rgba(173, 121, 72, 0.028) 36%,
+          rgba(173, 121, 72, 0.012) 56%,
+          rgba(173, 121, 72, 0.000) 100%
         );
       filter: blur(60px);
-      opacity: 0.9;
+      opacity: 0.92;
       border-radius: 999px;
       pointer-events: none;
       z-index: 0;
-      animation: tailDrift 9s ease-in-out infinite;
-      transition: opacity 0.85s ease, transform 1s ease, filter 1s ease;
     }
 
-    /* АНИМАЦИИ ФОРМЫ */
-    @keyframes morph1 {
-      0%, 100% {
-        clip-path: polygon(
-          48% 4%, 59% 6%, 69% 10%, 78% 18%, 87% 25%, 91% 36%, 96% 47%, 93% 58%,
-          97% 70%, 92% 80%, 84% 88%, 73% 93%, 61% 96%, 50% 98%, 39% 96%, 28% 94%,
-          18% 89%, 11% 80%, 7% 69%, 5% 57%, 4% 46%, 7% 34%, 11% 24%, 18% 16%,
-          28% 10%, 38% 7%
-        );
-      }
-      50% {
-        clip-path: polygon(
-          50% 5%, 61% 7%, 72% 12%, 80% 20%, 88% 28%, 93% 39%, 95% 50%, 92% 61%,
-          94% 72%, 89% 82%, 81% 89%, 70% 94%, 58% 96%, 47% 97%, 36% 95%, 25% 92%,
-          16% 86%, 10% 77%, 7% 66%, 6% 55%, 5% 43%, 8% 31%, 13% 21%, 21% 13%,
-          31% 8%, 40% 6%
-        );
-      }
+    /* МЯГКОЕ ДЫХАНИЕ */
+    @keyframes breatheOuter {
+      0%,100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.015); }
     }
 
-    @keyframes morph2 {
-      0%, 100% {
-        clip-path: polygon(
-          47% 6%, 58% 9%, 67% 12%, 75% 18%, 84% 27%, 88% 38%, 92% 49%, 90% 60%,
-          91% 70%, 86% 79%, 78% 87%, 68% 91%, 58% 94%, 48% 95%, 38% 93%, 28% 90%,
-          19% 84%, 13% 75%, 10% 65%, 9% 54%, 11% 43%, 13% 32%, 19% 23%, 28% 16%,
-          37% 10%
-        );
-      }
-      50% {
-        clip-path: polygon(
-          49% 8%, 60% 10%, 69% 15%, 77% 22%, 85% 31%, 89% 42%, 91% 53%, 88% 63%,
-          89% 73%, 84% 82%, 76% 88%, 66% 92%, 56% 94%, 46% 95%, 35% 93%, 25% 89%,
-          17% 82%, 12% 73%, 10% 63%, 10% 52%, 12% 41%, 16% 30%, 23% 21%, 32% 14%,
-          41% 10%
-        );
-      }
+    @keyframes breatheMid2 {
+      0%,100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.018); }
     }
 
-    @keyframes morph3 {
-      0%, 100% {
-        clip-path: polygon(
-          49% 8%, 58% 11%, 66% 16%, 74% 23%, 80% 31%, 84% 42%, 86% 51%, 84% 61%,
-          81% 70%, 75% 79%, 67% 85%, 58% 89%, 49% 91%, 40% 89%, 31% 85%, 23% 79%,
-          17% 71%, 14% 61%, 13% 51%, 14% 41%, 18% 31%, 24% 23%, 32% 16%, 40% 11%
-        );
-      }
-      50% {
-        clip-path: polygon(
-          50% 10%, 59% 13%, 68% 18%, 75% 25%, 81% 34%, 84% 44%, 84% 53%, 82% 63%,
-          78% 72%, 72% 80%, 64% 86%, 55% 89%, 46% 90%, 37% 88%, 29% 84%, 22% 78%,
-          17% 70%, 15% 61%, 15% 52%, 16% 42%, 20% 33%, 26% 25%, 34% 18%, 42% 13%
-        );
-      }
+    @keyframes breatheMid1 {
+      0%,100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.022); }
     }
 
-    @keyframes breathe1 {
-      0%,100% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.025) rotate(1deg); }
+    @keyframes breatheCore {
+      0%,100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.03); }
     }
 
-    @keyframes breathe2 {
-      0%,100% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.03) rotate(-1.5deg); }
+    /* ПОЭТАПНОЕ ЗАТУХАНИЕ ПРИ СКРОЛЛЕ */
+    .hero-focus.step-1 .ring-outer {
+      opacity: 0.28;
+      transform: translate(-50%, -50%) scale(0.985);
+      filter: blur(42px);
     }
 
-    @keyframes breathe3 {
-      0%,100% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.04) rotate(1.5deg); }
+    .hero-focus.step-2 .ring-mid-2 {
+      opacity: 0.26;
+      transform: translate(-50%, -50%) scale(0.985);
+      filter: blur(34px);
     }
 
-    @keyframes corePulse {
-      0%,100% { transform: translate(-50%, -50%) scale(1); filter: blur(12px); }
-      50% { transform: translate(-50%, -50%) scale(1.08); filter: blur(16px); }
-    }
-
-    @keyframes tailDrift {
-      0%,100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
-      50% { transform: translate(-50%, -50%) scale(1.03) rotate(1deg); }
-    }
-
-    /* ЛОГИКА ЗАТУХАНИЯ ПРИ СКРОЛЛЕ */
-    .hero-focus.step-1 .nebula-1 {
-      opacity: 0.25;
-      transform: scale(0.985);
+    .hero-focus.step-3 .ring-mid-1 {
+      opacity: 0.22;
+      transform: translate(-50%, -50%) scale(0.985);
       filter: blur(28px);
     }
 
-    .hero-focus.step-2 .nebula-2 {
-      opacity: 0.22;
-      transform: scale(0.985);
-      filter: blur(24px);
-    }
-
-    .hero-focus.step-3 .nebula-3 {
+    .hero-focus.step-4 .ring-core {
       opacity: 0.18;
-      transform: scale(0.98);
-      filter: blur(18px);
-    }
-
-    .hero-focus.step-4 .nebula-core,
-    .hero-focus.step-4::before {
-      opacity: 0.12;
-      transform: translate(-50%, -50%) scale(0.97);
-      filter: blur(18px);
+      transform: translate(-50%, -50%) scale(0.975);
+      filter: blur(22px);
     }
 
     .hero-subtitle {
-      color: var(--gold-soft);
+      color: #B89672;
       text-transform: uppercase;
       letter-spacing: 2px;
       font-size: 12px;
@@ -741,18 +662,18 @@
       }
 
       .hero-focus {
-        width: min(100vw, 820px);
-        height: min(100vw, 820px);
+        width: min(100vw, 760px);
+        height: min(100vw, 760px);
       }
 
-      .nebula-core {
-        width: 180px;
-        height: 180px;
-      }
+      .ring-outer { width: 760px; height: 760px; }
+      .ring-mid-2 { width: 610px; height: 610px; }
+      .ring-mid-1 { width: 460px; height: 460px; }
+      .ring-core { width: 260px; height: 260px; }
 
       .hero-focus::before {
-        width: 340px;
-        height: 660px;
+        width: 320px;
+        height: 640px;
       }
 
       .hero-intro {
@@ -796,18 +717,18 @@
       }
 
       .hero-focus {
-        width: 96vw;
-        height: 96vw;
+        width: 92vw;
+        height: 92vw;
       }
 
-      .nebula-core {
-        width: 32vw;
-        height: 32vw;
-      }
+      .ring-outer { width: 92vw; height: 92vw; }
+      .ring-mid-2 { width: 74vw; height: 74vw; }
+      .ring-mid-1 { width: 56vw; height: 56vw; }
+      .ring-core { width: 32vw; height: 32vw; }
 
       .hero-focus::before {
         width: 42vw;
-        height: 82vw;
+        height: 84vw;
       }
     }
   </style>
@@ -830,10 +751,10 @@
   <section class="hero fade-up" id="hero">
 
     <div class="hero-focus" id="heroFocus">
-      <div class="layer nebula-1"></div>
-      <div class="layer nebula-2"></div>
-      <div class="layer nebula-3"></div>
-      <div class="nebula-core"></div>
+      <div class="ring ring-outer"></div>
+      <div class="ring ring-mid-2"></div>
+      <div class="ring ring-mid-1"></div>
+      <div class="ring ring-core"></div>
     </div>
 
     <div class="hero-content container">
