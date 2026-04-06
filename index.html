@@ -7,7 +7,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -15,9 +15,12 @@
       --bg-soft: #1B1713;
       --bg-card: #201B17;
       --line: rgba(232, 226, 217, 0.08);
+
       --text: #E8E2D9;
       --muted: #A89F95;
       --muted-hero: #B9ACA0;
+      --accent-soft: #B89672;
+
       --accent: #8A6A4A;
       --hover-bg: rgba(138,106,74,0.12);
     }
@@ -39,6 +42,7 @@
       color: var(--text);
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
     }
 
@@ -56,71 +60,58 @@
     /* NAV */
     nav {
       position: fixed;
-      top: 16px;
+      top: 0;
       left: 0;
       width: 100%;
       z-index: 100;
-      pointer-events: none;
-      transition: transform 0.45s ease, opacity 0.35s ease;
+      backdrop-filter: blur(16px);
+      background: rgba(18, 16, 14, 0.50);
+      border-bottom: 1px solid rgba(232, 226, 217, 0.05);
+      transition:
+        transform 0.35s ease,
+        background 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+    }
+
+    nav.nav-scrolled {
+      background: rgba(18, 16, 14, 0.72);
+      border-bottom: 1px solid rgba(232, 226, 217, 0.08);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.16);
+    }
+
+    nav.nav-hidden {
+      transform: translateY(-100%);
     }
 
     .nav-inner {
-      max-width: 1120px;
+      max-width: 1160px;
       margin: 0 auto;
-      padding: 16px 24px;
+      padding: 20px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 20px;
-      border: 1px solid rgba(232, 226, 217, 0.08);
-      border-radius: 22px;
-      background: rgba(18, 16, 14, 0.44);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      box-shadow:
-        0 8px 30px rgba(0,0,0,0.18),
-        inset 0 1px 0 rgba(255,255,255,0.02);
-      pointer-events: auto;
-      transition:
-        padding 0.35s ease,
-        background 0.35s ease,
-        border-color 0.35s ease,
-        transform 0.35s ease,
-        box-shadow 0.35s ease;
-    }
-
-    nav.scrolled {
-      transform: translateY(-4px);
-    }
-
-    nav.scrolled .nav-inner {
-      padding: 12px 22px;
-      background: rgba(18, 16, 14, 0.62);
-      border-color: rgba(232, 226, 217, 0.11);
-      box-shadow:
-        0 12px 36px rgba(0,0,0,0.24),
-        inset 0 1px 0 rgba(255,255,255,0.025);
     }
 
     .logo {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 27px;
-      letter-spacing: 0.01em;
-      color: var(--text);
-      opacity: 0.97;
-      white-space: nowrap;
+      font-size: 32px;
       line-height: 1;
+      letter-spacing: 0.2px;
+      color: var(--text);
+      opacity: 0.96;
+      white-space: nowrap;
     }
 
     .nav-links {
       display: flex;
       gap: 28px;
       font-size: 15px;
-      color: var(--muted-hero);
+      color: var(--muted);
       flex-wrap: wrap;
       justify-content: flex-end;
-      font-weight: 400;
-      letter-spacing: 0.01em;
+      align-items: center;
     }
 
     .nav-links a {
@@ -132,21 +123,6 @@
       color: var(--text);
     }
 
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 0;
-      height: 1px;
-      background: rgba(232, 226, 217, 0.55);
-      transition: width 0.25s ease;
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
     /* HERO */
     .hero {
       min-height: 100vh;
@@ -155,7 +131,7 @@
       justify-content: center;
       text-align: center;
       position: relative;
-      padding: 150px 0 90px;
+      padding: 140px 0 90px;
       overflow: hidden;
       isolation: isolate;
     }
@@ -201,11 +177,11 @@
         radial-gradient(circle,
           rgba(145, 99, 58, 0.000) 0%,
           rgba(145, 99, 58, 0.000) 14%,
-          rgba(145, 99, 58, 0.020) 26%,
-          rgba(145, 99, 58, 0.040) 40%,
-          rgba(145, 99, 58, 0.060) 54%,
-          rgba(145, 99, 58, 0.040) 68%,
-          rgba(145, 99, 58, 0.018) 82%,
+          rgba(145, 99, 58, 0.030) 26%,
+          rgba(145, 99, 58, 0.055) 40%,
+          rgba(145, 99, 58, 0.082) 54%,
+          rgba(145, 99, 58, 0.055) 68%,
+          rgba(145, 99, 58, 0.022) 82%,
           rgba(145, 99, 58, 0.000) 100%);
       filter: blur(40px);
       opacity: 0.98;
@@ -219,11 +195,11 @@
         radial-gradient(circle,
           rgba(156, 108, 65, 0.000) 0%,
           rgba(156, 108, 65, 0.000) 12%,
-          rgba(156, 108, 65, 0.030) 24%,
-          rgba(156, 108, 65, 0.060) 40%,
-          rgba(156, 108, 65, 0.090) 54%,
-          rgba(156, 108, 65, 0.060) 68%,
-          rgba(156, 108, 65, 0.024) 82%,
+          rgba(156, 108, 65, 0.045) 24%,
+          rgba(156, 108, 65, 0.082) 40%,
+          rgba(156, 108, 65, 0.120) 54%,
+          rgba(156, 108, 65, 0.082) 68%,
+          rgba(156, 108, 65, 0.030) 82%,
           rgba(156, 108, 65, 0.000) 100%);
       filter: blur(32px);
       opacity: 0.96;
@@ -236,11 +212,11 @@
       background:
         radial-gradient(circle,
           rgba(170, 120, 72, 0.000) 0%,
-          rgba(170, 120, 72, 0.020) 16%,
-          rgba(170, 120, 72, 0.055) 32%,
-          rgba(170, 120, 72, 0.110) 50%,
-          rgba(170, 120, 72, 0.070) 66%,
-          rgba(170, 120, 72, 0.028) 82%,
+          rgba(170, 120, 72, 0.028) 16%,
+          rgba(170, 120, 72, 0.070) 32%,
+          rgba(170, 120, 72, 0.135) 50%,
+          rgba(170, 120, 72, 0.082) 66%,
+          rgba(170, 120, 72, 0.030) 82%,
           rgba(170, 120, 72, 0.000) 100%);
       filter: blur(26px);
       opacity: 1;
@@ -252,11 +228,11 @@
       height: 320px;
       background:
         radial-gradient(circle,
-          rgba(194, 145, 95, 0.240) 0%,
-          rgba(194, 145, 95, 0.190) 18%,
-          rgba(194, 145, 95, 0.130) 36%,
-          rgba(194, 145, 95, 0.075) 56%,
-          rgba(194, 145, 95, 0.028) 78%,
+          rgba(194, 145, 95, 0.280) 0%,
+          rgba(194, 145, 95, 0.220) 18%,
+          rgba(194, 145, 95, 0.145) 36%,
+          rgba(194, 145, 95, 0.085) 56%,
+          rgba(194, 145, 95, 0.032) 78%,
           rgba(194, 145, 95, 0.000) 100%);
       filter: blur(18px);
       opacity: 1;
@@ -274,10 +250,10 @@
       background:
         linear-gradient(
           180deg,
-          rgba(173, 121, 72, 0.065) 0%,
-          rgba(173, 121, 72, 0.045) 18%,
-          rgba(173, 121, 72, 0.028) 36%,
-          rgba(173, 121, 72, 0.012) 56%,
+          rgba(173, 121, 72, 0.085) 0%,
+          rgba(173, 121, 72, 0.060) 18%,
+          rgba(173, 121, 72, 0.038) 36%,
+          rgba(173, 121, 72, 0.016) 56%,
           rgba(173, 121, 72, 0.000) 100%
         );
       filter: blur(60px);
@@ -334,20 +310,19 @@
     .hero-subtitle {
       color: var(--muted-hero);
       text-transform: uppercase;
-      letter-spacing: 0.18em;
-      font-size: 15px;
-      font-weight: 500;
-      margin-bottom: 26px;
-      opacity: 0.96;
+      letter-spacing: 2px;
+      font-size: 13px;
+      font-weight: 400;
+      margin-bottom: 24px;
     }
 
     .hero h1 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(72px, 10vw, 118px);
+      font-size: clamp(72px, 10vw, 122px);
       line-height: 0.92;
       font-weight: 600;
-      margin-bottom: 28px;
-      letter-spacing: -0.02em;
+      margin-bottom: 34px;
+      letter-spacing: -1px;
       text-shadow:
         0 0 18px rgba(194, 145, 95, 0.05),
         0 0 34px rgba(194, 145, 95, 0.03);
@@ -356,11 +331,11 @@
     }
 
     .hero-intro {
-      max-width: 690px;
+      max-width: 700px;
       margin: 0 auto;
       color: var(--muted-hero);
       font-size: 22px;
-      line-height: 1.8;
+      line-height: 1.85;
       letter-spacing: 0.01em;
       text-wrap: balance;
       position: relative;
@@ -373,7 +348,7 @@
     }
 
     .buttons {
-      margin-top: 46px;
+      margin-top: 48px;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
@@ -386,13 +361,13 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 14px 22px;
+      padding: 15px 24px;
       border-radius: 999px;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 500;
       border: 1px solid rgba(194, 145, 95, 0.12);
       transition: all 0.25s ease;
-      min-width: 190px;
+      min-width: 200px;
       background: rgba(18, 16, 14, 0.18);
       color: var(--text);
       backdrop-filter: blur(6px);
@@ -421,27 +396,26 @@
     }
 
     .section-label {
-      color: #B9ACA0;
+      color: var(--accent-soft);
       text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 14px;
-      font-weight: 500;
+      letter-spacing: 2px;
+      font-size: 13px;
       margin-bottom: 12px;
-      opacity: 0.95;
+      font-weight: 500;
     }
 
     h2 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(40px, 5vw, 58px);
-      line-height: 1.02;
+      font-size: clamp(42px, 5vw, 64px);
+      line-height: 0.98;
       font-weight: 600;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.3px;
     }
 
     .section-desc {
-      max-width: 500px;
-      color: var(--muted-hero);
-      font-size: 16px;
+      max-width: 460px;
+      color: var(--muted);
+      font-size: 17px;
       line-height: 1.8;
     }
 
@@ -449,7 +423,7 @@
       background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
       border: 1px solid var(--line);
       border-radius: 24px;
-      padding: 28px;
+      padding: 32px;
       transition: all 0.3s ease;
     }
 
@@ -465,13 +439,13 @@
     }
 
     .about-main {
-      font-size: 17px;
+      font-size: 18px;
       color: var(--text);
-      line-height: 1.95;
+      line-height: 1.8;
     }
 
     .about-main p + p {
-      margin-top: 16px;
+      margin-top: 18px;
     }
 
     .mini-list {
@@ -480,7 +454,7 @@
     }
 
     .mini-item {
-      padding-bottom: 14px;
+      padding-bottom: 18px;
       border-bottom: 1px solid var(--line);
     }
 
@@ -492,14 +466,15 @@
     .mini-title {
       font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--muted);
-      margin-bottom: 6px;
+      letter-spacing: 1.8px;
+      color: var(--accent-soft);
+      margin-bottom: 8px;
+      font-weight: 500;
     }
 
     .mini-value {
       color: var(--text);
-      font-size: 15px;
+      font-size: 17px;
       line-height: 1.7;
     }
 
@@ -518,14 +493,13 @@
 
     .skill-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 32px;
+      font-size: 34px;
       margin-bottom: 14px;
-      line-height: 1;
     }
 
     .skill-list {
-      color: var(--muted-hero);
-      font-size: 16px;
+      color: var(--muted);
+      font-size: 17px;
       line-height: 1.8;
     }
 
@@ -545,20 +519,20 @@
       color: var(--muted);
       font-size: 13px;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
-      padding-top: 4px;
+      letter-spacing: 1.5px;
+      padding-top: 6px;
     }
 
     .timeline-role {
-      font-size: 26px;
+      font-size: 28px;
       font-family: 'Cormorant Garamond', serif;
       margin-bottom: 8px;
-      line-height: 1;
+      line-height: 1.1;
     }
 
     .timeline-company {
-      color: var(--muted-hero);
-      margin-bottom: 12px;
+      color: var(--muted);
+      margin-bottom: 14px;
       font-size: 15px;
     }
 
@@ -593,25 +567,25 @@
       display: flex;
       align-items: end;
       padding: 22px;
-      color: rgba(232, 226, 217, 0.5);
+      color: rgba(232, 226, 217, 0.52);
       font-size: 14px;
-      letter-spacing: 0.08em;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
     }
 
     .project-content {
-      padding: 24px;
+      padding: 26px;
     }
 
     .project-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 32px;
+      font-size: 34px;
       margin-bottom: 10px;
-      line-height: 1;
+      line-height: 1.05;
     }
 
     .project-text {
-      color: var(--muted-hero);
+      color: var(--muted);
       font-size: 16px;
       margin-bottom: 16px;
       line-height: 1.8;
@@ -619,14 +593,13 @@
 
     .project-tag {
       display: inline-block;
-      font-size: 12px;
+      font-size: 13px;
       color: var(--text);
       border: 1px solid var(--line);
       border-radius: 999px;
-      padding: 7px 12px;
+      padding: 8px 13px;
       margin-right: 8px;
       margin-top: 6px;
-      letter-spacing: 0.04em;
     }
 
     .contact-wrap {
@@ -637,15 +610,15 @@
 
     .contact-big {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(38px, 6vw, 62px);
+      font-size: clamp(40px, 6vw, 66px);
       line-height: 0.98;
       margin-bottom: 18px;
     }
 
     .contact-text {
-      color: var(--muted-hero);
+      color: var(--muted);
       max-width: 560px;
-      font-size: 16px;
+      font-size: 17px;
       line-height: 1.85;
     }
 
@@ -655,7 +628,7 @@
     }
 
     .contact-item {
-      padding: 18px 20px;
+      padding: 20px 22px;
       border-radius: 18px;
       background: rgba(255,255,255,0.02);
       border: 1px solid var(--line);
@@ -670,13 +643,14 @@
     .contact-label {
       font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--muted);
+      letter-spacing: 1.8px;
+      color: var(--accent-soft);
       margin-bottom: 6px;
+      font-weight: 500;
     }
 
     .contact-value {
-      font-size: 16px;
+      font-size: 17px;
       color: var(--text);
       word-break: break-word;
     }
@@ -743,22 +717,13 @@
         font-size: 19px;
         line-height: 1.8;
       }
+
+      .logo {
+        font-size: 28px;
+      }
     }
 
     @media (max-width: 640px) {
-      nav {
-        top: 10px;
-      }
-
-      .nav-inner {
-        border-radius: 18px;
-        padding: 14px 18px;
-      }
-
-      .logo {
-        font-size: 22px;
-      }
-
       .hero h1 {
         line-height: 0.98;
       }
@@ -781,15 +746,14 @@
         min-width: 100%;
       }
 
-      .hero-subtitle {
-        font-size: 13px;
-        letter-spacing: 0.16em;
-      }
-
       .hero-intro {
         font-size: 17px;
         line-height: 1.75;
         max-width: 95%;
+      }
+
+      .logo {
+        font-size: 22px;
       }
 
       .hero-focus {
@@ -806,12 +770,20 @@
         width: 42vw;
         height: 84vw;
       }
+
+      .hero-subtitle {
+        font-size: 12px;
+      }
+
+      h2 {
+        font-size: 44px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <nav id="siteNav">
+  <nav id="navbar">
     <div class="nav-inner">
       <div class="logo">Приложение к резюме hh.ru</div>
       <div class="nav-links">
@@ -1116,7 +1088,6 @@
     elements.forEach((el) => observer.observe(el));
 
     const heroFocus = document.getElementById('heroFocus');
-    const siteNav = document.getElementById('siteNav');
 
     function updateHeroGlowSteps() {
       const y = window.scrollY;
@@ -1127,16 +1098,36 @@
       if (y > 190) heroFocus.classList.add('step-2');
       if (y > 300) heroFocus.classList.add('step-3');
       if (y > 420) heroFocus.classList.add('step-4');
-
-      if (y > 24) {
-        siteNav.classList.add('scrolled');
-      } else {
-        siteNav.classList.remove('scrolled');
-      }
     }
 
-    window.addEventListener('scroll', updateHeroGlowSteps, { passive: true });
+    const navbar = document.getElementById('navbar');
+    let lastScrollY = window.scrollY;
+
+    function updateNavbar() {
+      const currentScroll = window.scrollY;
+
+      if (currentScroll > 30) {
+        navbar.classList.add('nav-scrolled');
+      } else {
+        navbar.classList.remove('nav-scrolled');
+      }
+
+      if (currentScroll > lastScrollY && currentScroll > 120) {
+        navbar.classList.add('nav-hidden');
+      } else {
+        navbar.classList.remove('nav-hidden');
+      }
+
+      lastScrollY = currentScroll;
+    }
+
+    window.addEventListener('scroll', () => {
+      updateHeroGlowSteps();
+      updateNavbar();
+    }, { passive: true });
+
     updateHeroGlowSteps();
+    updateNavbar();
   </script>
 
 </body>
