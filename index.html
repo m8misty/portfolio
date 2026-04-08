@@ -3,34 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Андрей Штыков — Portfolio</title>
+  <title>Андрей Штыков — Editorial Portfolio</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Газетный заголовочный + читабельный текст -->
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Newsreader:opsz,wght@6..72,400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #F7F7F4;
-      --bg-soft: #F1F1ED;
-      --bg-card: rgba(255, 255, 255, 0.72);
+      --paper: #f2eee8;
+      --paper-2: #ebe6df;
+      --paper-3: #dfd8cf;
 
-      --line: rgba(25, 28, 32, 0.08);
-      --line-strong: rgba(25, 28, 32, 0.14);
+      --ink: #171513;
+      --ink-soft: #2a2622;
+      --ink-mid: #5c564f;
+      --ink-light: #7c746b;
 
-      --text: #111315;
-      --muted: #6E747B;
-      --muted-hero: #5F666D;
+      --line: rgba(23, 21, 19, 0.14);
+      --line-strong: rgba(23, 21, 19, 0.24);
+      --hover: rgba(23, 21, 19, 0.05);
 
-      --accent: #B98A5A;
-      --accent-soft: #D7B18C;
-      --accent-glow: rgba(185, 138, 90, 0.18);
+      --shadow-soft: 0 10px 30px rgba(23, 21, 19, 0.05);
+      --shadow-paper: 0 18px 40px rgba(23, 21, 19, 0.04);
 
-      --hover-bg: rgba(185, 138, 90, 0.08);
-      --glass: rgba(255,255,255,0.62);
-
-      --shadow-soft: 0 10px 30px rgba(18, 20, 23, 0.06);
-      --shadow-card: 0 18px 45px rgba(18, 20, 23, 0.08);
+      --container: 1220px;
     }
 
     * {
@@ -45,18 +44,29 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Newsreader', serif;
       background:
-        radial-gradient(circle at top center, rgba(185,138,90,0.06) 0%, transparent 30%),
-        linear-gradient(180deg, #FBFBF8 0%, #F5F5F1 100%);
-      color: var(--text);
-      line-height: 1.7;
+        radial-gradient(circle at top left, rgba(0,0,0,0.02), transparent 28%),
+        linear-gradient(180deg, var(--paper) 0%, #f6f2ed 100%);
+      color: var(--ink);
+      line-height: 1.75;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
+      position: relative;
     }
 
-    body.menu-open {
-      overflow: hidden;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.12;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.015) 1px, transparent 1px);
+      background-size: 100% 38px, 38px 100%;
+      mask-image: radial-gradient(circle at center, black 40%, transparent 95%);
+      z-index: 0;
     }
 
     a {
@@ -64,152 +74,165 @@
       text-decoration: none;
     }
 
-    .container {
-      max-width: 1160px;
-      margin: 0 auto;
-      padding: 0 24px;
+    img {
+      max-width: 100%;
+      display: block;
     }
 
-    /* NAV */
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 28px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* =========================
+       NAV
+    ========================= */
     nav {
       position: fixed;
-      top: 16px;
+      top: 0;
       left: 0;
       width: 100%;
       z-index: 100;
-      pointer-events: none;
-      transition: transform 0.45s ease, opacity 0.35s ease;
-    }
-
-    .nav-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 16px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-      border: 1px solid rgba(17, 19, 21, 0.06);
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.62);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      box-shadow: 0 8px 28px rgba(20, 23, 26, 0.05);
-      pointer-events: auto;
-      transition:
-        padding 0.35s ease,
-        background 0.35s ease,
-        border-color 0.35s ease,
-        transform 0.35s ease,
-        box-shadow 0.35s ease;
-      position: relative;
-      z-index: 201;
+      transition: transform 0.35s ease, background 0.35s ease, border-color 0.35s ease;
+      background: rgba(242, 238, 232, 0.72);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid transparent;
     }
 
     nav.scrolled {
-      transform: translateY(-4px);
+      background: rgba(242, 238, 232, 0.88);
+      border-bottom-color: var(--line);
     }
 
-    nav.scrolled .nav-inner {
-      padding: 13px 22px;
-      background: rgba(255, 255, 255, 0.78);
-      border-color: rgba(17, 19, 21, 0.08);
-      box-shadow: 0 14px 38px rgba(20, 23, 26, 0.07);
+    .nav-inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 16px 28px 14px;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .masthead {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .masthead-top {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--ink-light);
+      white-space: nowrap;
     }
 
     .logo {
-      font-size: 18px;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      font-weight: 600;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 22px;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--ink);
       white-space: nowrap;
-      line-height: 1;
-      position: relative;
-      z-index: 202;
     }
 
     .nav-links {
       display: flex;
-      gap: 28px;
-      font-size: 15px;
-      color: var(--muted-hero);
-      flex-wrap: wrap;
+      gap: 26px;
+      align-items: center;
       justify-content: flex-end;
-      font-weight: 500;
-      letter-spacing: -0.01em;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
     }
 
     .nav-links a {
-      transition: 0.25s ease;
       position: relative;
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
+      transition: color 0.25s ease, opacity 0.25s ease;
+      opacity: 0.9;
     }
 
     .nav-links a::after {
       content: "";
       position: absolute;
       left: 0;
-      bottom: -4px;
+      bottom: -5px;
       width: 0;
-      height: 1.5px;
-      background: rgba(17, 19, 21, 0.72);
+      height: 1px;
+      background: var(--ink);
       transition: width 0.25s ease;
-      border-radius: 999px;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+      opacity: 1;
     }
 
     .nav-links a:hover::after {
       width: 100%;
     }
 
+    .nav-edition {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      white-space: nowrap;
+      border-left: 1px solid var(--line);
+      padding-left: 18px;
+    }
+
     /* BURGER */
     .burger {
       display: none;
-      width: 30px;
-      height: 22px;
+      width: 28px;
+      height: 20px;
       flex-direction: column;
       justify-content: space-between;
       cursor: pointer;
-      position: relative;
-      z-index: 202;
       flex-shrink: 0;
     }
 
     .burger span {
       width: 100%;
-      height: 2px;
+      height: 1.5px;
+      background: var(--ink);
       border-radius: 999px;
-      background: var(--text);
-      transition: 0.35s ease;
-      transform-origin: center;
+      transition: 0.3s ease;
     }
 
     .burger.active span:nth-child(1) {
-      transform: translateY(6px) scaleX(0.92);
+      transform: translateY(9px) rotate(45deg);
     }
 
     .burger.active span:nth-child(2) {
-      opacity: 0.35;
-      transform: scaleX(0.72);
+      opacity: 0;
     }
 
     .burger.active span:nth-child(3) {
-      transform: translateY(-6px) scaleX(0.92);
+      transform: translateY(-9px) rotate(-45deg);
     }
 
-    /* MOBILE MENU */
     .mobile-menu-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(244, 244, 240, 0.72);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(23, 21, 19, 0.14);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
       opacity: 0;
       visibility: hidden;
-      transition: 0.35s ease;
-      z-index: 180;
+      transition: 0.3s ease;
+      z-index: 90;
     }
 
     .mobile-menu-overlay.open {
@@ -223,16 +246,15 @@
       right: -100%;
       width: min(86vw, 380px);
       height: 100vh;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.96), rgba(248,248,244,0.98));
-      border-left: 1px solid rgba(17, 19, 21, 0.06);
-      padding: 110px 28px 34px;
+      background: #f4f0ea;
+      border-left: 1px solid var(--line);
+      padding: 110px 24px 30px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      transition: right 0.42s ease;
-      z-index: 190;
-      box-shadow: -20px 0 60px rgba(20, 23, 26, 0.08);
+      gap: 10px;
+      transition: right 0.35s ease;
+      z-index: 95;
+      box-shadow: -18px 0 50px rgba(0,0,0,0.06);
     }
 
     .mobile-menu.open {
@@ -241,584 +263,693 @@
 
     .mobile-menu a {
       padding: 14px 14px;
-      border-radius: 16px;
-      font-size: 17px;
-      color: var(--text);
-      background: rgba(255,255,255,0.68);
-      border: 1px solid rgba(17, 19, 21, 0.05);
+      border: 1px solid var(--line);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-soft);
       transition: 0.25s ease;
+      background: rgba(255,255,255,0.3);
     }
 
     .mobile-menu a:hover {
-      background: rgba(185, 138, 90, 0.08);
-      border-color: rgba(185, 138, 90, 0.12);
-      transform: translateX(4px);
+      background: var(--hover);
+      transform: translateX(3px);
     }
 
-    /* HERO */
+    /* =========================
+       HERO
+    ========================= */
     .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+      padding: 148px 0 78px;
       position: relative;
-      padding: 150px 0 90px;
-      overflow: hidden;
-      isolation: isolate;
+      z-index: 2;
     }
 
-    .hero-content {
+    .hero-shell {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 56px;
+      align-items: start;
+      border-top: 1px solid var(--line-strong);
+      border-bottom: 1px solid var(--line);
+      padding: 42px 0 46px;
       position: relative;
-      z-index: 3;
-      max-width: 980px;
     }
 
-    /* СВЕЧЕНИЕ */
-    .hero-focus {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: min(92vw, 980px);
-      height: min(92vw, 980px);
-      pointer-events: none;
-      z-index: 1;
-      opacity: 1;
-      transition: opacity 0.5s ease;
-    }
-
-    .hero-focus .ring {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      pointer-events: none;
-      transition:
-        opacity 0.75s ease,
-        transform 0.85s ease,
-        filter 0.85s ease;
-      mix-blend-mode: multiply;
-    }
-
-    .ring-outer {
-      width: 920px;
-      height: 920px;
-      background:
-        radial-gradient(circle,
-          rgba(185, 138, 90, 0.000) 0%,
-          rgba(185, 138, 90, 0.000) 14%,
-          rgba(185, 138, 90, 0.015) 26%,
-          rgba(185, 138, 90, 0.032) 40%,
-          rgba(185, 138, 90, 0.050) 54%,
-          rgba(185, 138, 90, 0.028) 68%,
-          rgba(185, 138, 90, 0.010) 82%,
-          rgba(185, 138, 90, 0.000) 100%);
-      filter: blur(44px);
-      opacity: 1;
-      animation: breatheOuter 10s ease-in-out infinite;
-    }
-
-    .ring-mid-2 {
-      width: 740px;
-      height: 740px;
-      background:
-        radial-gradient(circle,
-          rgba(196, 154, 111, 0.000) 0%,
-          rgba(196, 154, 111, 0.000) 12%,
-          rgba(196, 154, 111, 0.020) 24%,
-          rgba(196, 154, 111, 0.040) 40%,
-          rgba(196, 154, 111, 0.060) 54%,
-          rgba(196, 154, 111, 0.035) 68%,
-          rgba(196, 154, 111, 0.012) 82%,
-          rgba(196, 154, 111, 0.000) 100%);
-      filter: blur(34px);
-      opacity: 0.98;
-      animation: breatheMid2 8.5s ease-in-out infinite;
-    }
-
-    .ring-mid-1 {
-      width: 540px;
-      height: 540px;
-      background:
-        radial-gradient(circle,
-          rgba(207, 171, 132, 0.000) 0%,
-          rgba(207, 171, 132, 0.018) 16%,
-          rgba(207, 171, 132, 0.045) 32%,
-          rgba(207, 171, 132, 0.078) 50%,
-          rgba(207, 171, 132, 0.045) 66%,
-          rgba(207, 171, 132, 0.016) 82%,
-          rgba(207, 171, 132, 0.000) 100%);
-      filter: blur(26px);
-      opacity: 1;
-      animation: breatheMid1 7s ease-in-out infinite;
-    }
-
-    .ring-core {
-      width: 300px;
-      height: 300px;
-      background:
-        radial-gradient(circle,
-          rgba(219, 186, 149, 0.16) 0%,
-          rgba(219, 186, 149, 0.11) 18%,
-          rgba(219, 186, 149, 0.075) 36%,
-          rgba(219, 186, 149, 0.035) 56%,
-          rgba(219, 186, 149, 0.010) 78%,
-          rgba(219, 186, 149, 0.000) 100%);
-      filter: blur(18px);
-      opacity: 1;
-      animation: breatheCore 5.5s ease-in-out infinite;
-    }
-
-    .hero-focus::before {
+    .hero-shell::before {
       content: "";
       position: absolute;
       left: 50%;
-      top: 48%;
-      transform: translate(-50%, -50%);
-      width: 360px;
-      height: 700px;
-      background:
-        linear-gradient(
-          180deg,
-          rgba(205, 168, 128, 0.045) 0%,
-          rgba(205, 168, 128, 0.028) 24%,
-          rgba(205, 168, 128, 0.012) 48%,
-          rgba(205, 168, 128, 0.000) 100%
-        );
-      filter: blur(70px);
-      opacity: 0.95;
-      border-radius: 999px;
-      pointer-events: none;
-      z-index: 0;
+      top: 0;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, var(--line), transparent);
+      opacity: 0.8;
     }
 
-    @keyframes breatheOuter {
-      0%,100% { transform: translate(-50%, -50%) scale(1); }
-      50% { transform: translate(-50%, -50%) scale(1.015); }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+      margin-bottom: 22px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-light);
     }
 
-    @keyframes breatheMid2 {
-      0%,100% { transform: translate(-50%, -50%) scale(1); }
-      50% { transform: translate(-50%, -50%) scale(1.018); }
+    .hero-meta span {
+      position: relative;
+      padding-right: 18px;
     }
 
-    @keyframes breatheMid1 {
-      0%,100% { transform: translate(-50%, -50%) scale(1); }
-      50% { transform: translate(-50%, -50%) scale(1.022); }
+    .hero-meta span:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 1px;
+      background: var(--line-strong);
     }
 
-    @keyframes breatheCore {
-      0%,100% { transform: translate(-50%, -50%) scale(1); }
-      50% { transform: translate(-50%, -50%) scale(1.03); }
-    }
-
-    .hero-focus.step-1 .ring-outer {
-      opacity: 0.22;
-      transform: translate(-50%, -50%) scale(0.985);
-      filter: blur(46px);
-    }
-
-    .hero-focus.step-2 .ring-mid-2 {
-      opacity: 0.18;
-      transform: translate(-50%, -50%) scale(0.985);
-      filter: blur(36px);
-    }
-
-    .hero-focus.step-3 .ring-mid-1 {
-      opacity: 0.14;
-      transform: translate(-50%, -50%) scale(0.985);
-      filter: blur(28px);
-    }
-
-    .hero-focus.step-4 .ring-core {
-      opacity: 0.10;
-      transform: translate(-50%, -50%) scale(0.975);
-      filter: blur(22px);
-    }
-
-    .hero-subtitle {
-      color: var(--muted);
+    .hero-kicker {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 22px;
-      opacity: 0.95;
+      color: var(--ink-light);
+      margin-bottom: 14px;
     }
 
     .hero h1 {
-      font-size: clamp(68px, 10vw, 112px);
-      line-height: 0.9;
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(54px, 7vw, 98px);
+      line-height: 0.94;
       font-weight: 700;
-      margin-bottom: 26px;
-      letter-spacing: -0.05em;
-      position: relative;
-      z-index: 3;
+      letter-spacing: -0.03em;
+      max-width: 760px;
+      margin-bottom: 22px;
+      color: var(--ink);
     }
 
     .hero-intro {
+      font-size: 24px;
+      line-height: 1.55;
       max-width: 760px;
-      margin: 0 auto;
-      color: var(--muted-hero);
+      color: var(--ink-soft);
+      margin-bottom: 26px;
+    }
+
+    .hero-lead {
+      max-width: 760px;
+      color: var(--ink-mid);
+      font-size: 17px;
+      line-height: 1.95;
+      column-count: 2;
+      column-gap: 42px;
+      column-rule: 1px solid rgba(23, 21, 19, 0.08);
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero-aside-card {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.28);
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .aside-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 10px;
+    }
+
+    .aside-title {
+      font-family: 'Libre Baskerville', serif;
       font-size: 22px;
-      line-height: 1.72;
-      letter-spacing: -0.02em;
-      text-wrap: balance;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      color: var(--ink);
+    }
+
+    .aside-text {
+      color: var(--ink-mid);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .hero-visual {
+      min-height: 370px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.38), rgba(255,255,255,0.08)),
+        repeating-linear-gradient(
+          0deg,
+          rgba(23, 21, 19, 0.025) 0px,
+          rgba(23, 21, 19, 0.025) 1px,
+          transparent 1px,
+          transparent 34px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          rgba(23, 21, 19, 0.02) 0px,
+          rgba(23, 21, 19, 0.02) 1px,
+          transparent 1px,
+          transparent 34px
+        ),
+        linear-gradient(135deg, #f4f0ea 0%, #e9e3db 100%);
       position: relative;
-      z-index: 3;
-      font-weight: 400;
+      overflow: hidden;
+      box-shadow: var(--shadow-paper);
     }
 
-    .hero-intro .line {
-      display: block;
+    .hero-visual::before {
+      content: "PLACE YOUR WORK / PLAN / RENDER HERE";
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(23, 21, 19, 0.45);
     }
 
-    .buttons {
-      margin-top: 42px;
+    .hero-visual::after {
+      content: "Editorial Insert";
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(23, 21, 19, 0.4);
+    }
+
+    .hero-buttons {
       display: flex;
-      justify-content: center;
       flex-wrap: wrap;
-      gap: 14px;
-      position: relative;
-      z-index: 3;
+      gap: 12px;
+      margin-top: 34px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 14px 22px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 600;
-      border: 1px solid rgba(17, 19, 21, 0.08);
-      transition: all 0.25s ease;
-      min-width: 190px;
-      background: rgba(255,255,255,0.78);
-      color: var(--text);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 8px 24px rgba(20, 23, 26, 0.04);
+      padding: 13px 18px;
+      border: 1px solid var(--line-strong);
+      background: rgba(255,255,255,0.22);
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: 0.25s ease;
+      min-width: 188px;
     }
 
     .btn:hover {
-      background: rgba(255,255,255,0.98);
-      border-color: rgba(17, 19, 21, 0.12);
+      background: var(--hover);
       transform: translateY(-2px);
-      box-shadow: 0 14px 30px rgba(20, 23, 26, 0.08);
     }
 
-    /* SECTIONS */
+    /* =========================
+       GENERAL SECTION
+    ========================= */
     section {
-      padding: 110px 0;
-      border-top: 1px solid rgba(17, 19, 21, 0.04);
+      padding: 72px 0;
+      position: relative;
+      z-index: 2;
     }
 
-    .section-head {
-      margin-bottom: 42px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 20px;
-      flex-wrap: wrap;
+    .section-wrap {
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+    }
+
+    .section-top {
+      display: grid;
+      grid-template-columns: 230px 1fr;
+      gap: 32px;
+      margin-bottom: 28px;
+      align-items: start;
+    }
+
+    .section-label-block {
+      position: sticky;
+      top: 92px;
     }
 
     .section-label {
-      color: var(--accent);
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      font-size: 12px;
-      font-weight: 700;
+      color: var(--ink-light);
       margin-bottom: 12px;
-      opacity: 0.95;
     }
 
-    h2 {
-      font-size: clamp(36px, 5vw, 58px);
-      line-height: 1.02;
+    .section-number {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 42px;
+      line-height: 1;
+      color: rgba(23, 21, 19, 0.22);
+      margin-bottom: 8px;
+    }
+
+    .section-side-note {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--ink-mid);
+      max-width: 180px;
+    }
+
+    .section-main h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.04;
       font-weight: 700;
-      letter-spacing: -0.045em;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+      max-width: 880px;
     }
 
     .section-desc {
-      max-width: 500px;
-      color: var(--muted-hero);
-      font-size: 16px;
-      line-height: 1.8;
+      max-width: 820px;
+      color: var(--ink-mid);
+      font-size: 18px;
+      line-height: 1.9;
     }
 
-    .card {
-      background: var(--bg-card);
-      border: 1px solid rgba(17, 19, 21, 0.05);
-      border-radius: 28px;
-      padding: 30px;
-      transition: all 0.3s ease;
-      box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(17, 19, 21, 0.08);
-      box-shadow: var(--shadow-card);
-    }
-
-    .about-grid {
+    /* =========================
+       ABOUT
+    ========================= */
+    .about-layout {
       display: grid;
-      grid-template-columns: 1.3fr 0.9fr;
-      gap: 22px;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 34px;
+      align-items: start;
     }
 
-    .about-main {
-      font-size: 17px;
-      color: var(--text);
+    .article-block {
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+    }
+
+    .article-columns {
+      column-count: 2;
+      column-gap: 36px;
+      column-rule: 1px solid rgba(23, 21, 19, 0.08);
+      font-size: 18px;
       line-height: 1.95;
+      color: var(--ink-soft);
     }
 
-    .about-main p + p {
-      margin-top: 16px;
+    .article-columns p {
+      margin-bottom: 16px;
+      break-inside: avoid;
     }
 
-    .mini-list {
+    .side-facts {
       display: grid;
-      gap: 14px;
+      gap: 16px;
     }
 
-    .mini-item {
-      padding-bottom: 14px;
-      border-bottom: 1px solid rgba(17, 19, 21, 0.06);
+    .fact-card {
+      border-top: 1px solid var(--line-strong);
+      padding-top: 16px;
     }
 
-    .mini-item:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .mini-title {
-      font-size: 12px;
-      text-transform: uppercase;
+    .fact-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
       letter-spacing: 0.14em;
-      color: var(--muted);
-      margin-bottom: 6px;
-      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 8px;
     }
 
-    .mini-value {
-      color: var(--text);
+    .fact-value {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 24px;
+      line-height: 1.35;
+      color: var(--ink);
+    }
+
+    .fact-note {
+      margin-top: 8px;
       font-size: 15px;
-      line-height: 1.7;
+      line-height: 1.8;
+      color: var(--ink-mid);
     }
 
-    .grid {
+    /* =========================
+       SKILLS
+    ========================= */
+    .skills-grid {
       display: grid;
-      gap: 22px;
-    }
-
-    .grid-2 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px 34px;
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
     }
 
-    .grid-3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+    .skill-item {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 18px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .skill-index {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 30px;
+      color: rgba(23, 21, 19, 0.32);
+      line-height: 1;
     }
 
     .skill-title {
-      font-size: 28px;
-      margin-bottom: 14px;
-      line-height: 1;
-      font-weight: 700;
-      letter-spacing: -0.04em;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 30px;
+      line-height: 1.1;
+      margin-bottom: 10px;
     }
 
-    .skill-list {
-      color: var(--muted-hero);
-      font-size: 16px;
-      line-height: 1.8;
+    .skill-text {
+      color: var(--ink-mid);
+      font-size: 17px;
+      line-height: 1.9;
     }
 
+    /* =========================
+       EXPERIENCE
+    ========================= */
     .timeline {
-      display: grid;
-      gap: 18px;
+      border-top: 1px solid var(--line);
     }
 
     .timeline-item {
       display: grid;
-      grid-template-columns: 170px 1fr;
-      gap: 24px;
-      align-items: start;
+      grid-template-columns: 220px 1fr;
+      gap: 34px;
+      padding: 26px 0 30px;
+      border-bottom: 1px solid var(--line);
     }
 
     .timeline-date {
-      color: var(--muted);
-      font-size: 13px;
-      text-transform: uppercase;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
       letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-light);
       padding-top: 4px;
-      font-weight: 600;
     }
 
     .timeline-role {
-      font-size: 26px;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 34px;
+      line-height: 1.08;
       margin-bottom: 8px;
-      line-height: 1;
-      font-weight: 700;
-      letter-spacing: -0.04em;
     }
 
     .timeline-company {
-      color: var(--muted-hero);
-      margin-bottom: 12px;
-      font-size: 15px;
-      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--ink-light);
+      margin-bottom: 14px;
     }
 
     .timeline-desc {
-      color: var(--text);
-      font-size: 16px;
-      line-height: 1.85;
+      color: var(--ink-soft);
+      font-size: 18px;
+      line-height: 1.95;
+      max-width: 900px;
     }
 
-    .project {
+    /* =========================
+       VISUAL STRIP
+    ========================= */
+    .visual-strip {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      margin-top: 30px;
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+    }
+
+    .visual-large,
+    .visual-small {
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.34), rgba(255,255,255,0.08)),
+        linear-gradient(135deg, #f5f1eb 0%, #e6dfd6 100%);
+      position: relative;
       overflow: hidden;
-      border-radius: 28px;
-      background: rgba(255,255,255,0.76);
-      border: 1px solid rgba(17, 19, 21, 0.05);
-      transition: all 0.35s ease;
+      min-height: 260px;
+    }
+
+    .visual-small {
+      min-height: 260px;
+    }
+
+    .visual-large::before,
+    .visual-small::before {
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(23, 21, 19, 0.42);
+    }
+
+    .visual-large::after,
+    .visual-small::after {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(23, 21, 19, 0.35);
+    }
+
+    .visual-large::before { content: "FULL-WIDTH PROJECT / PLAN / SHEET"; }
+    .visual-large::after  { content: "Architectural Spread"; }
+
+    .visual-small::before { content: "DETAIL / RENDER / FRAGMENT"; }
+    .visual-small::after  { content: "Editorial Insert"; }
+
+    /* =========================
+       PROJECTS
+    ========================= */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+    }
+
+    .project-card {
       display: flex;
       flex-direction: column;
-      box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      gap: 0;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.2);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
 
-    .project:hover {
-      transform: translateY(-6px);
-      border-color: rgba(17, 19, 21, 0.08);
-      box-shadow: var(--shadow-card);
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-soft);
+      border-color: var(--line-strong);
     }
 
     .project-image {
-      width: 100%;
       aspect-ratio: 4 / 3;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0.04)),
-        radial-gradient(circle at top left, rgba(185,138,90,0.18), transparent 45%),
-        linear-gradient(135deg, #F5F2ED 0%, #ECE9E2 100%);
-      display: flex;
-      align-items: end;
-      padding: 22px;
-      color: rgba(17, 19, 21, 0.42);
-      font-size: 13px;
-      letter-spacing: 0.08em;
+        linear-gradient(180deg, rgba(255,255,255,0.32), rgba(255,255,255,0.05)),
+        repeating-linear-gradient(
+          0deg,
+          rgba(23,21,19,0.02) 0px,
+          rgba(23,21,19,0.02) 1px,
+          transparent 1px,
+          transparent 30px
+        ),
+        linear-gradient(135deg, #f3efe9 0%, #e4ddd4 100%);
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+
+    .project-image::before {
+      content: "PLACE IMAGE HERE";
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
       text-transform: uppercase;
-      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: rgba(23,21,19,0.42);
     }
 
     .project-content {
-      padding: 24px;
+      padding: 22px 20px 20px;
+    }
+
+    .project-kicker {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--ink-light);
+      margin-bottom: 10px;
     }
 
     .project-title {
-      font-size: 30px;
-      margin-bottom: 10px;
-      line-height: 1;
-      font-weight: 700;
-      letter-spacing: -0.04em;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 28px;
+      line-height: 1.12;
+      margin-bottom: 12px;
     }
 
     .project-text {
-      color: var(--muted-hero);
+      color: var(--ink-mid);
       font-size: 16px;
+      line-height: 1.85;
       margin-bottom: 16px;
-      line-height: 1.8;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     .project-tag {
-      display: inline-block;
-      font-size: 12px;
-      color: var(--text);
-      border: 1px solid rgba(17, 19, 21, 0.07);
-      border-radius: 999px;
-      padding: 7px 12px;
-      margin-right: 8px;
-      margin-top: 6px;
-      letter-spacing: 0.03em;
-      background: rgba(255,255,255,0.68);
-      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--ink-soft);
+      border: 1px solid var(--line);
+      padding: 6px 10px;
+      background: rgba(255,255,255,0.22);
     }
 
-    .contact-wrap {
+    /* =========================
+       CONTACT
+    ========================= */
+    .contact-layout {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 22px;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 34px;
+      align-items: start;
+    }
+
+    .contact-main {
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
     }
 
     .contact-big {
-      font-size: clamp(38px, 6vw, 62px);
-      line-height: 0.98;
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(36px, 5vw, 64px);
+      line-height: 1.04;
+      letter-spacing: -0.02em;
       margin-bottom: 18px;
-      font-weight: 700;
-      letter-spacing: -0.05em;
+      max-width: 780px;
     }
 
     .contact-text {
-      color: var(--muted-hero);
-      max-width: 560px;
-      font-size: 16px;
-      line-height: 1.85;
+      color: var(--ink-mid);
+      font-size: 18px;
+      line-height: 1.95;
+      max-width: 760px;
     }
 
     .contact-list {
-      display: grid;
-      gap: 14px;
+      border-top: 1px solid var(--line);
     }
 
     .contact-item {
-      padding: 18px 20px;
-      border-radius: 22px;
-      background: rgba(255,255,255,0.76);
-      border: 1px solid rgba(17, 19, 21, 0.05);
-      transition: 0.25s ease;
-      box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-    }
-
-    .contact-item:hover {
-      transform: translateY(-3px);
-      border-color: rgba(17, 19, 21, 0.08);
-      box-shadow: var(--shadow-card);
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: start;
     }
 
     .contact-label {
-      font-size: 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.14em;
-      color: var(--muted);
-      margin-bottom: 6px;
-      font-weight: 600;
+      color: var(--ink-light);
+      padding-top: 4px;
     }
 
     .contact-value {
-      font-size: 16px;
-      color: var(--text);
+      font-family: 'Libre Baskerville', serif;
+      font-size: 24px;
+      line-height: 1.35;
+      color: var(--ink);
       word-break: break-word;
-      font-weight: 500;
     }
 
+    /* =========================
+       FOOTER
+    ========================= */
     footer {
-      border-top: 1px solid rgba(17, 19, 21, 0.05);
-      padding: 28px 24px 40px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 14px;
+      padding: 36px 0 42px;
+      border-top: 1px solid var(--line);
+      position: relative;
+      z-index: 2;
     }
 
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+      color: var(--ink-light);
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* =========================
+       ANIMATION
+    ========================= */
     .fade-up {
       opacity: 0;
-      transform: translateY(34px);
+      transform: translateY(28px);
       transition: opacity 0.8s ease, transform 0.8s ease;
       will-change: opacity, transform;
     }
@@ -828,27 +959,46 @@
       transform: translateY(0);
     }
 
-    /* TABLET */
-    @media (max-width: 980px) {
-      .about-grid,
-      .contact-wrap,
-      .timeline-item,
-      .grid-3,
-      .grid-2 {
+    /* =========================
+       RESPONSIVE
+    ========================= */
+    @media (max-width: 1100px) {
+      .hero-shell,
+      .about-layout,
+      .contact-layout,
+      .visual-strip,
+      .projects-grid,
+      .skills-grid {
         grid-template-columns: 1fr;
       }
 
-      .timeline-date {
-        padding-top: 0;
+      .hero-shell::before {
+        display: none;
       }
 
-      .hero {
-        min-height: auto;
-        padding-top: 150px;
-        padding-bottom: 90px;
+      .hero-lead,
+      .article-columns {
+        column-count: 1;
+        column-rule: none;
       }
 
-      .nav-links {
+      .section-top {
+        grid-template-columns: 1fr;
+      }
+
+      .section-label-block {
+        position: static;
+        max-width: none;
+      }
+
+      .section-side-note {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .nav-links,
+      .nav-edition {
         display: none;
       }
 
@@ -856,166 +1006,128 @@
         display: flex;
       }
 
-      .hero-focus {
-        width: min(100vw, 760px);
-        height: min(100vw, 760px);
+      .nav-inner {
+        grid-template-columns: 1fr auto;
       }
 
-      .ring-outer { width: 760px; height: 760px; }
-      .ring-mid-2 { width: 610px; height: 610px; }
-      .ring-mid-1 { width: 460px; height: 460px; }
-      .ring-core { width: 260px; height: 260px; }
-
-      .hero-focus::before {
-        width: 320px;
-        height: 640px;
+      .timeline-item,
+      .contact-item {
+        grid-template-columns: 1fr;
+        gap: 10px;
       }
 
-      .hero-intro {
-        max-width: 650px;
-        font-size: 19px;
-        line-height: 1.8;
+      .hero {
+        padding-top: 128px;
       }
 
-      .buttons {
-        gap: 12px;
+      .hero h1 {
+        max-width: 100%;
       }
     }
 
-    /* MOBILE */
     @media (max-width: 640px) {
-      nav {
-        top: 10px;
-      }
-
       .container {
         padding: 0 18px;
       }
 
       .nav-inner {
-        border-radius: 18px;
-        padding: 14px 18px;
+        padding: 14px 18px 12px;
+      }
+
+      .masthead-top {
+        font-size: 10px;
       }
 
       .logo {
-        font-size: 16px;
-        max-width: 75%;
-        line-height: 1.08;
+        font-size: 18px;
       }
 
       .hero {
-        min-height: auto;
-        padding-top: 126px;
-        padding-bottom: 72px;
+        padding: 116px 0 56px;
       }
 
-      .hero-content {
-        max-width: 100%;
+      .hero-shell {
+        padding: 28px 0 30px;
+        gap: 28px;
       }
 
-      .hero-subtitle {
-        font-size: 11px;
-        letter-spacing: 0.15em;
-        margin-bottom: 18px;
+      .hero-meta {
+        gap: 8px 12px;
       }
 
       .hero h1 {
-        font-size: clamp(52px, 17vw, 72px);
-        line-height: 0.95;
-        margin-bottom: 18px;
+        font-size: clamp(40px, 13vw, 60px);
+        line-height: 0.98;
       }
 
       .hero-intro {
-        font-size: 16px;
-        line-height: 1.7;
-        max-width: 100%;
+        font-size: 20px;
+        line-height: 1.55;
       }
 
-      .buttons {
-        margin-top: 34px;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
+      .hero-lead,
+      .section-desc,
+      .timeline-desc,
+      .contact-text,
+      .skill-text,
+      .project-text,
+      .article-columns {
+        font-size: 16px;
+        line-height: 1.85;
       }
 
       .btn {
         width: 100%;
         min-width: 100%;
-        padding: 15px 18px;
       }
 
-      .section-head {
-        margin-bottom: 28px;
+      .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
       }
 
-      .section-desc {
-        font-size: 15px;
+      .section-main h2 {
+        font-size: clamp(30px, 9vw, 44px);
       }
 
-      h2 {
-        font-size: clamp(34px, 10vw, 44px);
+      .section-number {
+        font-size: 34px;
       }
 
-      .card,
-      .project-content,
-      .project-image {
-        padding: 20px;
-      }
-
-      section {
-        padding: 80px 0;
-      }
-
-      .about-main,
-      .timeline-desc,
-      .project-text,
-      .contact-text,
-      .skill-list {
-        font-size: 15px;
-        line-height: 1.8;
+      .timeline-role {
+        font-size: 28px;
       }
 
       .skill-title,
       .project-title {
-        font-size: 28px;
-      }
-
-      .timeline-role {
-        font-size: 24px;
+        font-size: 26px;
       }
 
       .contact-big {
-        font-size: clamp(32px, 11vw, 44px);
+        font-size: clamp(30px, 11vw, 42px);
       }
 
-      .hero-focus {
-        width: 110vw;
-        height: 110vw;
-        top: 47%;
+      .contact-value,
+      .fact-value {
+        font-size: 21px;
       }
 
-      .ring-outer { width: 110vw; height: 110vw; }
-      .ring-mid-2 { width: 86vw; height: 86vw; }
-      .ring-mid-1 { width: 62vw; height: 62vw; }
-      .ring-core { width: 34vw; height: 34vw; }
-
-      .hero-focus::before {
-        width: 46vw;
-        height: 92vw;
-      }
-
-      .mobile-menu {
-        width: 84vw;
-        padding-top: 94px;
+      .project-content,
+      .hero-aside-card {
+        padding: 18px;
       }
     }
   </style>
 </head>
 <body>
 
+  <!-- NAV -->
   <nav id="siteNav">
     <div class="nav-inner">
-      <div class="logo">Приложение к резюме hh.ru</div>
+      <div class="masthead">
+        <div class="masthead-top">Architectural Editorial Archive</div>
+        <div class="logo">Приложение к резюме hh.ru</div>
+      </div>
 
       <div class="nav-links">
         <a href="#about">Обо мне</a>
@@ -1024,6 +1136,8 @@
         <a href="#projects">Проекты</a>
         <a href="#contacts">Контакты</a>
       </div>
+
+      <div class="nav-edition">Edition 2026</div>
 
       <div class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" role="button" tabindex="0">
         <span></span>
@@ -1043,283 +1157,415 @@
     <a href="#contacts">Контакты</a>
   </div>
 
+  <!-- HERO -->
   <section class="hero fade-up" id="hero">
+    <div class="container">
+      <div class="hero-shell">
 
-    <div class="hero-focus" id="heroFocus">
-      <div class="ring ring-outer"></div>
-      <div class="ring ring-mid-2"></div>
-      <div class="ring ring-mid-1"></div>
-      <div class="ring ring-core"></div>
-    </div>
+        <div class="hero-main">
+          <div class="hero-meta">
+            <span>Riga / Remote</span>
+            <span>Portfolio Format</span>
+            <span>Architecture / PTО</span>
+          </div>
 
-    <div class="hero-content container">
-      <div class="hero-subtitle">Инженер ПТО / Архитектор-дизайнер</div>
+          <div class="hero-kicker">Profile / Personal Editorial</div>
 
-      <h1>Штыков<br>Андрей</h1>
+          <h1>Андрей Штыков</h1>
 
-      <div class="hero-intro">
-        <span class="line">Строительная документация, архитектурные задачи</span>
-        <span class="line">и визуализация проектов</span>
-      </div>
+          <div class="hero-intro">
+            Строительная документация, архитектурные задачи и визуализация проектов
+          </div>
 
-      <div class="buttons">
-        <a href="#projects" class="btn">Смотреть проекты</a>
-        <a href="#" class="btn">Скачать PDF-резюме</a>
-        <a href="#contacts" class="btn">Контакты</a>
+          <div class="hero-lead">
+            Этот сайт задуман как приложение к резюме — не в формате обычного лендинга, а как
+            личная профессиональная публикация. Здесь собраны рабочие направления, опыт,
+            проектная практика и визуальные материалы, которые лучше показывают подход к работе,
+            чем стандартный список навыков.
+          </div>
+
+          <div class="hero-buttons">
+            <a href="#projects" class="btn">Смотреть проекты</a>
+            <a href="#" class="btn">Скачать PDF-резюме</a>
+            <a href="#contacts" class="btn">Контакты</a>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <div class="hero-visual"></div>
+
+          <div class="hero-aside-card">
+            <div class="aside-label">Editorial Note</div>
+            <div class="aside-title">Площадка для планов, чертежей, рендеров и рабочих листов</div>
+            <div class="aside-text">
+              Сюда позже можно поставить фрагмент плана, фасад, визуализацию или кусок
+              проектного альбома — и это будет смотреться как часть журнальной публикации.
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
+  <!-- ABOUT -->
   <section id="about" class="fade-up">
     <div class="container">
-      <div class="section-head">
-        <div>
-          <div class="section-label">Обо мне</div>
-          <h2>Строительная документация и архитектурная практика</h2>
-        </div>
-        <div class="section-desc">
-          Портфолио, в котором собраны опыт, рабочие задачи и реальные направления деятельности.
-        </div>
-      </div>
+      <div class="section-wrap">
+        <div class="section-top">
+          <div class="section-label-block">
+            <div class="section-number">01</div>
+            <div class="section-label">Обо мне</div>
+            <div class="section-side-note">
+              Краткая вводная часть о рабочем профиле, формате занятости и текущем направлении.
+            </div>
+          </div>
 
-      <div class="about-grid">
-        <div class="card about-main">
-          <p>
-            Инженер ПТО с опытом работы с исполнительной и проектной документацией.
-            Работаю с актами скрытых работ, исполнительными схемами, журналами работ
-            и технической документацией по строительным объектам.
-          </p>
-          <p>
-            Также занимаюсь архитектурными проектами: АР-раздел, каркасные дома,
-            визуализации, планировочные решения и узлы. Уверенно работаю в AutoCAD,
-            Revit и Archicad, ориентируюсь в строительной нормативной базе и проектной логике.
-          </p>
+          <div class="section-main">
+            <h2>Строительная документация и архитектурная практика</h2>
+            <div class="section-desc">
+              Портфолио, в котором собраны опыт, рабочие задачи и реальные направления деятельности.
+            </div>
+          </div>
         </div>
 
-        <div class="card mini-list">
-          <div class="mini-item">
-            <div class="mini-title">Формат</div>
-            <div class="mini-value">Полная / частичная / проектная занятость</div>
+        <div class="about-layout">
+          <div class="article-block">
+            <div class="article-columns">
+              <p>
+                Инженер ПТО с опытом работы с исполнительной и проектной документацией.
+                Работаю с актами скрытых работ, исполнительными схемами, журналами работ
+                и технической документацией по строительным объектам.
+              </p>
+              <p>
+                Также занимаюсь архитектурными проектами: АР-раздел, каркасные дома,
+                визуализации, планировочные решения и узлы. Уверенно работаю в AutoCAD,
+                Revit и Archicad, ориентируюсь в строительной нормативной базе и проектной логике.
+              </p>
+            </div>
           </div>
-          <div class="mini-item">
-            <div class="mini-title">Работа</div>
-            <div class="mini-value">Удалённо / на месте работодателя</div>
-          </div>
-          <div class="mini-item">
-            <div class="mini-title">Готовность</div>
-            <div class="mini-value">Готов к переезду и редким командировкам</div>
+
+          <div class="side-facts">
+            <div class="fact-card">
+              <div class="fact-label">Формат</div>
+              <div class="fact-value">Полная / частичная / проектная занятость</div>
+              <div class="fact-note">Подходят как постоянная работа, так и отдельные проектные задачи.</div>
+            </div>
+
+            <div class="fact-card">
+              <div class="fact-label">Работа</div>
+              <div class="fact-value">Удалённо / на месте работодателя</div>
+              <div class="fact-note">Готов подстраиваться под формат команды и специфику задач.</div>
+            </div>
+
+            <div class="fact-card">
+              <div class="fact-label">Готовность</div>
+              <div class="fact-value">Готов к переезду и редким командировкам</div>
+              <div class="fact-note">При сильном проекте формат обсуждаем.</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- SKILLS -->
   <section id="skills" class="fade-up">
     <div class="container">
-      <div class="section-head">
-        <div>
-          <div class="section-label">Навыки</div>
-          <h2>Инструменты и рабочая практика</h2>
-        </div>
-        <div class="section-desc">
-          Не просто список программ, а реальные рабочие задачи и то, с чем я действительно работаю.
-        </div>
-      </div>
+      <div class="section-wrap">
+        <div class="section-top">
+          <div class="section-label-block">
+            <div class="section-number">02</div>
+            <div class="section-label">Навыки</div>
+            <div class="section-side-note">
+              Не просто список программ, а набор рабочих направлений и инструментов.
+            </div>
+          </div>
 
-      <div class="grid grid-2">
-        <div class="card">
-          <div class="skill-title">Проектирование</div>
-          <div class="skill-list">
-            AutoCAD, Revit, Archicad, разработка проектной и рабочей документации
+          <div class="section-main">
+            <h2>Инструменты и рабочая практика</h2>
+            <div class="section-desc">
+              Не просто список программ, а реальные рабочие задачи и то, с чем я действительно работаю.
+            </div>
           </div>
         </div>
-        <div class="card">
-          <div class="skill-title">Исполнительная документация</div>
-          <div class="skill-list">
-            АОСР, исполнительные схемы, журналы работ, проверка документации
+
+        <div class="skills-grid">
+          <div class="skill-item">
+            <div class="skill-index">01</div>
+            <div>
+              <div class="skill-title">Проектирование</div>
+              <div class="skill-text">
+                AutoCAD, Revit, Archicad, разработка проектной и рабочей документации
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="card">
-          <div class="skill-title">Архитектура</div>
-          <div class="skill-list">
-            АР-раздел, каркасные дома, планировки, узлы, малоэтажное строительство
+
+          <div class="skill-item">
+            <div class="skill-index">02</div>
+            <div>
+              <div class="skill-title">Исполнительная документация</div>
+              <div class="skill-text">
+                АОСР, исполнительные схемы, журналы работ, проверка документации
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="card">
-          <div class="skill-title">Визуализация</div>
-          <div class="skill-list">
-            SketchUp, Photoshop, 3D-моделирование, подача проектных решений
+
+          <div class="skill-item">
+            <div class="skill-index">03</div>
+            <div>
+              <div class="skill-title">Архитектура</div>
+              <div class="skill-text">
+                АР-раздел, каркасные дома, планировки, узлы, малоэтажное строительство
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-index">04</div>
+            <div>
+              <div class="skill-title">Визуализация</div>
+              <div class="skill-text">
+                SketchUp, Photoshop, 3D-моделирование, подача проектных решений
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- EXPERIENCE -->
   <section id="experience" class="fade-up">
     <div class="container">
-      <div class="section-head">
-        <div>
-          <div class="section-label">Опыт</div>
-          <h2>Практика в строительстве и проектировании</h2>
-        </div>
-        <div class="section-desc">
-          Кратко и по делу — чтобы было понятно, чем именно я занимался в работе.
-        </div>
-      </div>
+      <div class="section-wrap">
+        <div class="section-top">
+          <div class="section-label-block">
+            <div class="section-number">03</div>
+            <div class="section-label">Опыт</div>
+            <div class="section-side-note">
+              Практика в строительстве, архитектуре и проектной документации.
+            </div>
+          </div>
 
-      <div class="timeline">
-        <div class="card timeline-item">
-          <div class="timeline-date">2025 — настоящее время</div>
-          <div>
-            <div class="timeline-role">Инженер ПТО</div>
-            <div class="timeline-company">Новый век (Инкотек)</div>
-            <div class="timeline-desc">
-              Ведение исполнительной документации по фасадным системам (СФТК, НФС).
-              Подготовка исполнительных схем, актов скрытых работ (АОСР), журналов работ.
-              Контроль корректности документации, взаимодействие с подрядчиками и проверка соответствия проекту.
+          <div class="section-main">
+            <h2>Практика в строительстве и проектировании</h2>
+            <div class="section-desc">
+              Кратко и по делу — чтобы было понятно, чем именно я занимался в работе.
             </div>
           </div>
         </div>
 
-        <div class="card timeline-item">
-          <div class="timeline-date">2023 — настоящее время</div>
-          <div>
-            <div class="timeline-role">Архитектор</div>
-            <div class="timeline-company">RUSKI</div>
-            <div class="timeline-desc">
-              Разработка архитектурного раздела (АР) каркасных домов.
-              Работа с планировками, фасадами и узлами, подготовка чертежей и проектных решений.
-              Создание 3D-моделей и визуализаций для представления проектов.
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">2025 — настоящее время</div>
+            <div>
+              <div class="timeline-role">Инженер ПТО</div>
+              <div class="timeline-company">Новый век (Инкотек)</div>
+              <div class="timeline-desc">
+                Ведение исполнительной документации по фасадным системам (СФТК, НФС).
+                Подготовка исполнительных схем, актов скрытых работ (АОСР), журналов работ.
+                Контроль корректности документации, взаимодействие с подрядчиками и проверка соответствия проекту.
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2023 — настоящее время</div>
+            <div>
+              <div class="timeline-role">Архитектор</div>
+              <div class="timeline-company">RUSKI</div>
+              <div class="timeline-desc">
+                Разработка архитектурного раздела (АР) каркасных домов.
+                Работа с планировками, фасадами и узлами, подготовка чертежей и проектных решений.
+                Создание 3D-моделей и визуализаций для представления проектов.
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2023 — 2024</div>
+            <div>
+              <div class="timeline-role">Архитектор-дизайнер</div>
+              <div class="timeline-company">Manera Design</div>
+              <div class="timeline-desc">
+                Разработка и оформление проектных альбомов.
+                Создание 3D-моделей, коллажей и визуализаций.
+                Подготовка чертежей планировок и узлов, взаимодействие с заказчиком и застройщиками.
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2023</div>
+            <div>
+              <div class="timeline-role">Архитектор-дизайнер</div>
+              <div class="timeline-company">Студия интерьера Moonlight</div>
+              <div class="timeline-desc">
+                Подготовка чертежей, проработка узлов и мебели, участие в интерьерных проектных задачах.
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2023</div>
+            <div>
+              <div class="timeline-role">Младший инженер</div>
+              <div class="timeline-company">MIC System</div>
+              <div class="timeline-desc">
+                Подготовка и корректировка чертежей, сборка узлов и оформление технической документации.
+                Работа с исходными данными и приведение чертежей к рабочему виду.
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="card timeline-item">
-          <div class="timeline-date">2023 — 2024</div>
-          <div>
-            <div class="timeline-role">Архитектор-дизайнер</div>
-            <div class="timeline-company">Manera Design</div>
-            <div class="timeline-desc">
-              Разработка и оформление проектных альбомов.
-              Создание 3D-моделей, коллажей и визуализаций.
-              Подготовка чертежей планировок и узлов, взаимодействие с заказчиком и застройщиками.
-            </div>
-          </div>
-        </div>
-
-        <div class="card timeline-item">
-          <div class="timeline-date">2023</div>
-          <div>
-            <div class="timeline-role">Архитектор-дизайнер</div>
-            <div class="timeline-company">Студия интерьера Moonlight</div>
-            <div class="timeline-desc">
-              Подготовка чертежей, проработка узлов и мебели, участие в интерьерных проектных задачах.
-            </div>
-          </div>
-        </div>
-
-        <div class="card timeline-item">
-          <div class="timeline-date">2023</div>
-          <div>
-            <div class="timeline-role">Младший инженер</div>
-            <div class="timeline-company">MIC System</div>
-            <div class="timeline-desc">
-              Подготовка и корректировка чертежей, сборка узлов и оформление технической документации.
-              Работа с исходными данными и приведение чертежей к рабочему виду.
-            </div>
-          </div>
+        <div class="visual-strip">
+          <div class="visual-large"></div>
+          <div class="visual-small"></div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- PROJECTS -->
   <section id="projects" class="fade-up">
     <div class="container">
-      <div class="section-head">
-        <div>
-          <div class="section-label">Проекты</div>
-          <h2>Избранные направления</h2>
-        </div>
-        <div class="section-desc">
-          Пока здесь базовые карточки. Позже можно подставить реальные проекты, рендеры и рабочие материалы.
-        </div>
-      </div>
-
-      <div class="grid grid-3">
-        <div class="project">
-          <div class="project-image">Project Preview</div>
-          <div class="project-content">
-            <div class="project-title">Каркасный дом</div>
-            <div class="project-text">
-              Разработка архитектурного раздела, планировки, фасады, визуализация.
+      <div class="section-wrap">
+        <div class="section-top">
+          <div class="section-label-block">
+            <div class="section-number">04</div>
+            <div class="section-label">Проекты</div>
+            <div class="section-side-note">
+              Блок под реальные кейсы, рендеры, планы, фасады и рабочие материалы.
             </div>
-            <span class="project-tag">АР</span>
-            <span class="project-tag">Малоэтажка</span>
+          </div>
+
+          <div class="section-main">
+            <h2>Избранные направления</h2>
+            <div class="section-desc">
+              Пока здесь базовые карточки. Позже можно подставить реальные проекты, рендеры и рабочие материалы.
+            </div>
           </div>
         </div>
 
-        <div class="project">
-          <div class="project-image">Project Preview</div>
-          <div class="project-content">
-            <div class="project-title">Фасадная документация</div>
-            <div class="project-text">
-              Подготовка исполнительных схем и документации по фасадным системам СФТК и НФС.
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="project-image"></div>
+            <div class="project-content">
+              <div class="project-kicker">Residential / AR</div>
+              <div class="project-title">Каркасный дом</div>
+              <div class="project-text">
+                Разработка архитектурного раздела, планировки, фасады, визуализация.
+              </div>
+              <div class="project-tags">
+                <span class="project-tag">АР</span>
+                <span class="project-tag">Малоэтажка</span>
+              </div>
             </div>
-            <span class="project-tag">ПТО</span>
-            <span class="project-tag">Исполнительная</span>
           </div>
-        </div>
 
-        <div class="project">
-          <div class="project-image">Project Preview</div>
-          <div class="project-content">
-            <div class="project-title">Интерьерный проект</div>
-            <div class="project-text">
-              Планировки, узлы, мебель, визуализация и оформление альбома.
+          <div class="project-card">
+            <div class="project-image"></div>
+            <div class="project-content">
+              <div class="project-kicker">Facade / Executive Docs</div>
+              <div class="project-title">Фасадная документация</div>
+              <div class="project-text">
+                Подготовка исполнительных схем и документации по фасадным системам СФТК и НФС.
+              </div>
+              <div class="project-tags">
+                <span class="project-tag">ПТО</span>
+                <span class="project-tag">Исполнительная</span>
+              </div>
             </div>
-            <span class="project-tag">Интерьер</span>
-            <span class="project-tag">Визуализация</span>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image"></div>
+            <div class="project-content">
+              <div class="project-kicker">Interior / Visualization</div>
+              <div class="project-title">Интерьерный проект</div>
+              <div class="project-text">
+                Планировки, узлы, мебель, визуализация и оформление альбома.
+              </div>
+              <div class="project-tags">
+                <span class="project-tag">Интерьер</span>
+                <span class="project-tag">Визуализация</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- CONTACTS -->
   <section id="contacts" class="fade-up">
     <div class="container">
-      <div class="contact-wrap">
-        <div>
-          <div class="section-label">Контакты</div>
-          <div class="contact-big">Открыт к сильным проектам и нормальной работе</div>
-          <div class="contact-text">
-            Связаться можно напрямую по почте, телефону или через резюме.
-            Позже сюда можно добавить PDF, Telegram и ссылку на hh.ru.
+      <div class="section-wrap">
+        <div class="section-top">
+          <div class="section-label-block">
+            <div class="section-number">05</div>
+            <div class="section-label">Контакты</div>
+            <div class="section-side-note">
+              Блок для прямой связи, PDF-резюме, Telegram и рабочих ссылок.
+            </div>
+          </div>
+
+          <div class="section-main">
+            <h2>Открыт к сильным проектам и нормальной работе</h2>
+            <div class="section-desc">
+              Связаться можно напрямую по почте, телефону или через резюме.
+              Позже сюда можно добавить PDF, Telegram и ссылку на hh.ru.
+            </div>
           </div>
         </div>
 
-        <div class="contact-list">
-          <div class="contact-item">
-            <div class="contact-label">Email</div>
-            <div class="contact-value">andrew.shtykov@gmail.com</div>
+        <div class="contact-layout">
+          <div class="contact-main">
+            <div class="contact-big">
+              Если нужен человек, который понимает и документацию, и архитектурную часть — можно связаться напрямую.
+            </div>
+            <div class="contact-text">
+              Этот сайт задуман как рабочее приложение к резюме и может дополняться
+              реальными проектами, фрагментами альбомов, чертежами, визуализациями и
+              архитектурными материалами в более полном формате.
+            </div>
           </div>
-          <div class="contact-item">
-            <div class="contact-label">Телефон</div>
-            <div class="contact-value">+7 (996) 231-16-01</div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-label">Сайт</div>
-            <div class="contact-value">m8misty.github.io/portfolio</div>
+
+          <div class="contact-list">
+            <div class="contact-item">
+              <div class="contact-label">Email</div>
+              <div class="contact-value">andrew.shtykov@gmail.com</div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-label">Телефон</div>
+              <div class="contact-value">+7 (996) 231-16-01</div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-label">Сайт</div>
+              <div class="contact-value">m8misty.github.io/portfolio</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
-    © 2026 Андрей Штыков
+    <div class="container">
+      <div class="footer-inner">
+        <div>© 2026 Андрей Штыков</div>
+        <div>Architectural Editorial Archive</div>
+      </div>
+    </div>
   </footer>
 
   <script>
+    // reveal
     const elements = document.querySelectorAll('.fade-up');
 
     const observer = new IntersectionObserver((entries) => {
@@ -1334,29 +1580,23 @@
 
     elements.forEach((el) => observer.observe(el));
 
-    const heroFocus = document.getElementById('heroFocus');
+    // nav scroll
     const siteNav = document.getElementById('siteNav');
 
-    function updateHeroGlowSteps() {
+    function updateNav() {
       const y = window.scrollY;
 
-      heroFocus.classList.remove('step-1', 'step-2', 'step-3', 'step-4');
-
-      if (y > 90) heroFocus.classList.add('step-1');
-      if (y > 190) heroFocus.classList.add('step-2');
-      if (y > 300) heroFocus.classList.add('step-3');
-      if (y > 420) heroFocus.classList.add('step-4');
-
-      if (y > 24) {
+      if (y > 16) {
         siteNav.classList.add('scrolled');
       } else {
         siteNav.classList.remove('scrolled');
       }
     }
 
-    window.addEventListener('scroll', updateHeroGlowSteps, { passive: true });
-    updateHeroGlowSteps();
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
 
+    // burger
     const burger = document.getElementById('burger');
     const mobileMenu = document.getElementById('mobileMenu');
     const mobileOverlay = document.getElementById('mobileOverlay');
@@ -1366,7 +1606,7 @@
       burger.setAttribute('aria-expanded', 'true');
       mobileMenu.classList.add('open');
       mobileOverlay.classList.add('open');
-      document.body.classList.add('menu-open');
+      document.body.style.overflow = 'hidden';
     }
 
     function closeMenu() {
@@ -1374,7 +1614,7 @@
       burger.setAttribute('aria-expanded', 'false');
       mobileMenu.classList.remove('open');
       mobileOverlay.classList.remove('open');
-      document.body.classList.remove('menu-open');
+      document.body.style.overflow = '';
     }
 
     function toggleMenu() {
